@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS=-g -I /usr/include/boost
 LDFLAGS=-l boost_thread
-OBJS=main.o search.o server.o client.o thread.o
+OBJS=main.o search.o client.o thread.o
 
 all: wbd
 
