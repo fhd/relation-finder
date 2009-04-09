@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-g -I /usr/include/boost
+CXXFLAGS=-I /usr/include/boost
 LDFLAGS=-l boost_thread
 OBJS=main.o search.o client.o thread.o
 
