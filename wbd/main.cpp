@@ -46,6 +46,7 @@ int main(int argc, char **argv)
 	int start = 1;
 	int goal = 5;
 	int depth = 5;
+
 	search *s = new search(graph);
 	path_t *path = s->shortest_path(start, goal, depth);
 	if (!path) {
@@ -60,6 +61,9 @@ int main(int argc, char **argv)
 		}
 		std::cout << std::endl;
 	}
+
+	delete s;
+	delete path;
 
 	return 0;
 }
