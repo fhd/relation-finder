@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 
 	// Den Weg von 1 nach 7 berechnen
 	int start = 1;
-	int goal = 5;
+	int goal = 7;
 	int depth = 5;
 
 	search *s = new search(graph);

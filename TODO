@@ -1,6 +1,7 @@
+- Create unit tests for the search class
 - Use asio to create a server
-- Implement the fetcher (using boost db access, sqlite+mysql)
-- Write a db creation script (sqlite only)
 - Write a simple test client
+- Write a db creation script
+- Implement the fetcher (http://soci.sourceforge.net/)
 - Fill README
 - Use jam?

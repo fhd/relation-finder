@@ -13,8 +13,8 @@ public:
 private:
 	graph_t m_graph;
 
-	nodes_t find_successors(node_t node, const nodes_t &processed);
-	path_t *breadth_first(agenda_t &agenda, nodes_t &processed, node_t goal, int depth_limit);
+	nodes_t find_successors(node_t node, nodes_t &memtable);
+	path_t *breadth_first(agenda_t &agenda, nodes_t &memtable, node_t goal, int depth_limit);
 };
 
 #endif /* _SEARCH_HPP */
