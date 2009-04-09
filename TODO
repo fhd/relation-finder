@@ -1,0 +1,5 @@
+- Use asio to create a server
+- Implement the fetcher (using boost db access, sqlite+mysql)
+- Write a db creation script (sqlite only)
+- Write a simple test client
+- Fill README
