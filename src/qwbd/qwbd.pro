@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET = ../../qwbd
 DEPENDPATH += .
 INCLUDEPATH += .
 QT = core network sql

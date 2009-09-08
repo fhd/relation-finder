@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET = ../../qcreate
 DEPENDPATH += .
 INCLUDEPATH += .
 QT = core sql
