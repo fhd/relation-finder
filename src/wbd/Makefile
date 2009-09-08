@@ -1,15 +1,17 @@
 CXX=g++
 CXXFLAGS=-I /usr/include/boost
 LDFLAGS=-l boost_thread
+
+NAME=../../wbd
 OBJS=main.o search.o client.o thread.o
 
-all: wbd
+all: $(NAME)
 
-wbd: $(OBJS)
-	$(CXX) $(LDFLAGS) $(OBJS) -o ../wbd
+$(NAME): $(OBJS)
+	$(CXX) $(LDFLAGS) $(OBJS) -o $(NAME)
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c $<
 
 clean:
-	$(RM) *.o ../wbd
+	$(RM) *.o $(NAME)

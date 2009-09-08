@@ -1,5 +1,5 @@
 all:
-	$(MAKE) -C wbd
+	$(MAKE) -C src
 
 clean:
-	$(MAKE) clean -C wbd
+	$(MAKE) clean -C src
