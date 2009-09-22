@@ -4,7 +4,7 @@
 #include <boost/foreach.hpp>
 #include "search.hpp"
 
-/**
+/*
  * Constructor that sets the graph to the given value
  */
 search::search(const graph_t &graph)
@@ -12,14 +12,14 @@ search::search(const graph_t &graph)
 {
 }
 
-/**
- * Deconstructor
+/*
+ * Destructor
  */
 search::~search()
 {
 }
 
-/**
+/*
  * Returns the shortest path from start to goal.
  * Stops once the depth limit is reached.
  * Returns NULL if no path could be found.
@@ -34,13 +34,14 @@ path_t *search::shortest_path(node_t start, node_t goal, int depth_limit)
 	return breadth_first(agenda, memtable, goal, depth_limit);
 }
 
-/**
+/*
  * Performs a depth-limited breadth-first search to find the shortest path
  * between two nodes. Returns NULL if no path could be found.
  * Uses a memoisation table to never expand the same node twice.
- * Stops once the depth limit is reached, .
+ * Stops once the depth limit is reached.
  */
-path_t *search::breadth_first(agenda_t &agenda, nodes_t &memtable, node_t goal, int depth_limit)
+path_t *search::breadth_first(agenda_t &agenda, nodes_t &memtable,
+                              node_t goal, int depth_limit)
 {
 #if 0
 	std::cout << "breath_first:" << std::endl;
@@ -92,7 +93,7 @@ path_t *search::breadth_first(agenda_t &agenda, nodes_t &memtable, node_t goal, 
 	return breadth_first(agenda, memtable, goal, depth_limit);
 }
 
-/**
+/*
  * Finds all the successors of the current node,
  * i.e. all siblings we didn't process yet and
  * updates the memoisation table
