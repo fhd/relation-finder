@@ -1,9 +1,9 @@
-CP=cp -p
+MV=mv -f
 RM=rm -f
 
 all:
 	$(MAKE) -C wbd
-	$(CP) wbd/wbd ..
+	$(MV) wbd/wbd ..
 
 clean:
 	$(MAKE) clean -C wbd
