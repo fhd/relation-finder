@@ -1,10 +1,12 @@
 #include <iostream>
 #include <boost/foreach.hpp>
-#include "search.hpp"
+#include "graph_searcher.hpp"
 
 int main(int argc, char **argv)
 {
-	graph_t graph;
+	// TODO: Instead of this simple test, create a daemon.
+
+	graph::graph_t graph;
 /*
 	nodes_t edge0, edge1, edge2, edge3;
 	edge0.push_back(1);
@@ -18,7 +20,7 @@ int main(int argc, char **argv)
 	graph[2] = edge2;
 	graph[3] = edge3;
 */
-	nodes_t edge0, edge1, edge2, edge3, edge4, edge5, edge6, edge7;
+	graph::nodes_t edge0, edge1, edge2, edge3, edge4, edge5, edge6, edge7;
 	edge1.push_back(2);
 	edge1.push_back(3);
 	edge2.push_back(1);
@@ -47,13 +49,13 @@ int main(int argc, char **argv)
 	int goal = 7;
 	int depth = 5;
 
-	search *s = new search(graph);
-	path_t *path = s->shortest_path(start, goal, depth);
+	graph_searcher *s = new graph_searcher(graph);
+	graph::path_t *path = s->find_shortest_path(start, goal, depth);
 	if (!path) {
 		std::cout << "Could not find shortest path." << std::endl;
 	} else {
 		std::cout << "The shortest path is: ";
-		BOOST_FOREACH (int node, *path) {
+		BOOST_FOREACH (graph::node_t node, *path) {
 			std::cout << node;
 			if (node != path->back()) {
 				std::cout << " -> ";

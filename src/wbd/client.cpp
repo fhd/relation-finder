@@ -11,5 +11,5 @@ client::~client()
 
 void client::run()
 {
-	// TODO
+	// TODO: Implement the client.
 }

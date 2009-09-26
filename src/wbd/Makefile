@@ -3,7 +3,7 @@ CXXFLAGS=-I /usr/include/boost
 LDFLAGS=-l boost_thread
 
 NAME=wbd
-OBJS=main.o search.o client.o thread.o
+OBJS=main.o graph_searcher.o client.o thread.o
 
 all: $(NAME)
 

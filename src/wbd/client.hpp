@@ -1,17 +1,20 @@
-#ifndef _CLIENT_HPP
-#define _CLIENT_HPP
+#ifndef CLIENT_HPP
+#define CLIENT_HPP
 
-#include "typedef.h"
 #include "thread.hpp"
 
+/** A thread handling a client */
 class client : public thread
 {
 public:
+	/** Constructor */
 	client();
+
+	/** Destructor */
 	~client();
 
 private:
 	void run();
 };
 
-#endif /* _CLIENT_HPP */
+#endif /* CLIENT_HPP */
