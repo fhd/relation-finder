@@ -1,5 +1,6 @@
 #include <iostream>
 #include <boost/foreach.hpp>
+
 #include "graph_searcher.hpp"
 
 int main(int argc, char **argv)

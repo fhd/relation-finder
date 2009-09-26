@@ -38,25 +38,28 @@ public:
 	 * Stops once the depth limit is reached.
 	 * Returns NULL if no path could be found.
 	 */
-	graph::path_t *find_shortest_path(graph::node_t start, graph::node_t goal, int depth_limit);
+	graph::path_t *find_shortest_path(graph::node_t start, graph::node_t goal,
+			int depth_limit);
 
 private:
 	graph::graph_t m_graph;
 
 	/**
-	 * Performs a depth-limited breadth-first search to find the shortest path
-	 * between two nodes. Returns NULL if no path could be found.
+	 * Performs a depth-limited breadth-first search to find the shortest
+	 * path between two nodes. Returns NULL if no path could be found.
 	 * Uses a memoisation table to never expand the same node twice.
 	 * Stops once the depth limit is reached, .
 	 */
-	graph::path_t *breadth_first(graph::agenda_t &agenda, graph::nodes_t &memtable, graph::node_t goal,	int depth_limit);
+	graph::path_t *breadth_first(graph::agenda_t &agenda,
+			graph::nodes_t &memtable, graph::node_t goal, int depth_limit);
 
 	/**
 	 * Finds all the successors of the current node.
 	 * Th all siblings we didn't process yet and
 	 * updates the memoisation table
 	 */
-	graph::nodes_t find_successors(graph::node_t node, graph::nodes_t &memtable);
+	graph::nodes_t find_successors(graph::node_t node,
+                graph::nodes_t &memtable);
 };
 
 #endif /* SEARCH_HPP */

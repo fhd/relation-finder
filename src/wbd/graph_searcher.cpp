@@ -4,7 +4,7 @@
 #include <boost/foreach.hpp>
 #include "graph_searcher.hpp"
 
-graph_searcher::graph_searcher(const graph::graph_t &graph)
+graph_searcher::graph_searcher(graph::graph_t &graph)
 : m_graph(graph)
 {
 }
@@ -13,7 +13,8 @@ graph_searcher::~graph_searcher()
 {
 }
 
-graph::path_t *graph_searcher::find_shortest_path(graph::node_t start, graph::node_t goal, int depth_limit)
+graph::path_t *graph_searcher::find_shortest_path(graph::node_t start,
+		graph::node_t goal, int depth_limit)
 {
 	graph::agenda_t agenda;
 	graph::nodes_t memtable;
@@ -23,7 +24,8 @@ graph::path_t *graph_searcher::find_shortest_path(graph::node_t start, graph::no
 	return breadth_first(agenda, memtable, goal, depth_limit);
 }
 
-graph::path_t *graph_searcher::breadth_first(graph::agenda_t &agenda, graph::nodes_t &memtable, graph::node_t goal, int depth_limit)
+graph::path_t *graph_searcher::breadth_first(graph::agenda_t &agenda,
+		graph::nodes_t &memtable, graph::node_t goal, int depth_limit)
 {
 #if 0
 	std::cout << "breath_first:" << std::endl;
@@ -72,7 +74,8 @@ graph::path_t *graph_searcher::breadth_first(graph::agenda_t &agenda, graph::nod
 	return breadth_first(agenda, memtable, goal, depth_limit);
 }
 
-graph::nodes_t graph_searcher::find_successors(graph::node_t current, graph::nodes_t &memtable)
+graph::nodes_t graph_searcher::find_successors(graph::node_t current,
+		graph::nodes_t &memtable)
 {
 	graph::nodes_t successors;
 	graph::graph_t::iterator iter = m_graph.find(current);
@@ -83,7 +86,8 @@ graph::nodes_t graph_searcher::find_successors(graph::node_t current, graph::nod
 	// Find all successors that are not yet on the memoisation table
 	graph::nodes_t siblings = iter->second;
 	BOOST_FOREACH (graph::node_t sibling, siblings) {
-		graph::nodes_t::iterator miter = find(memtable.begin(), memtable.end(), sibling);
+		graph::nodes_t::iterator miter =
+				find(memtable.begin(), memtable.end(), sibling);
 		if (miter == memtable.end()) {
 			memtable.push_back(sibling);
 			successors.push_back(sibling);
