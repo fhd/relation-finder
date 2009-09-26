@@ -1,7 +1,7 @@
-- Create unit tests for the search class
+- Create unit tests for the graph_searcher class
 - Use asio to create a server
 - Write a simple test client
 - Write a db creation script
 - Implement the fetcher (http://soci.sourceforge.net/)
 - Fill README
-- Use jam?
+- Use jam or CMake
