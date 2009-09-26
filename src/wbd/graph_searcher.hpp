@@ -28,7 +28,7 @@ class graph_searcher
 {
 public:
 	/** Constructor that sets the graph to the given value */
-	graph_searcher(const graph::graph_t &graph);
+	graph_searcher(graph::graph_t &graph);
 
 	/** Destructor */
 	~graph_searcher();
