@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <iostream>
 #include <boost/foreach.hpp>
+
 #include "graph_searcher.hpp"
 
 graph_searcher::graph_searcher(graph::graph_t &graph)
