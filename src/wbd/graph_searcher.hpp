@@ -50,7 +50,7 @@ private:
 	 * Uses a memoisation table to never expand the same node twice.
 	 * Stops once the depth limit is reached, .
 	 */
-	graph::path_t *breadth_first(graph::agenda_t &agenda,
+	graph::path_t *find_breadth_first(graph::agenda_t &agenda,
 			graph::nodes_t &memtable, graph::node_t goal, int depth_limit);
 
 	/**

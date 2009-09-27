@@ -21,10 +21,10 @@ graph::path_t *graph_searcher::find_shortest_path(graph::node_t start,
 	graph::path_t first;
 	first.push_back(start);
 	agenda.push_back(first);
-	return breadth_first(agenda, memtable, goal, depth_limit);
+	return find_breadth_first(agenda, memtable, goal, depth_limit);
 }
 
-graph::path_t *graph_searcher::breadth_first(graph::agenda_t &agenda,
+graph::path_t *graph_searcher::find_breadth_first(graph::agenda_t &agenda,
 		graph::nodes_t &memtable, graph::node_t goal, int depth_limit)
 {
 #if 0
@@ -71,7 +71,7 @@ graph::path_t *graph_searcher::breadth_first(graph::agenda_t &agenda,
 	}
 
 	// Search again
-	return breadth_first(agenda, memtable, goal, depth_limit);
+	return find_breadth_first(agenda, memtable, goal, depth_limit);
 }
 
 graph::nodes_t graph_searcher::find_successors(graph::node_t current,
