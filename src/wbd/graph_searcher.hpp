@@ -39,7 +39,7 @@ public:
 	 * Returns NULL if no path could be found.
 	 */
 	graph::path_t *find_shortest_path(graph::node_t start, graph::node_t goal,
-			int depth_limit);
+		int depth_limit);
 
 private:
 	graph::graph_t m_graph;
@@ -51,7 +51,7 @@ private:
 	 * Stops once the depth limit is reached, .
 	 */
 	graph::path_t *find_breadth_first(graph::agenda_t &agenda,
-			graph::nodes_t &memtable, graph::node_t goal, int depth_limit);
+		graph::nodes_t &memtable, graph::node_t goal, int depth_limit);
 
 	/**
 	 * Finds all the successors of the current node.
@@ -59,7 +59,7 @@ private:
 	 * updates the memoisation table
 	 */
 	graph::nodes_t find_successors(graph::node_t node,
-                graph::nodes_t &memtable);
+		graph::nodes_t &memtable);
 };
 
 #endif /* SEARCH_HPP */
