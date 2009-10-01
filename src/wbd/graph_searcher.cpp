@@ -32,12 +32,12 @@ graph::path_t *graph_searcher::find_breadth_first(graph::agenda_t &agenda,
 	std::cout << "breath_first:" << std::endl;
 	std::cout << "  agenda:";
 	BOOST_FOREACH (path_t path, agenda) {
-	std::cout << " " << path.back();
+		std::cout << " " << path.back();
 	}
 	std::cout << std::endl;
 	std::cout << "  memtable:";
 	BOOST_FOREACH (node_t node, memtable) {
-	std::cout << " " << node;
+		std::cout << " " << node;
 	}
 	std::cout << std::endl;
 	std::cout << "  goal: " << goal << std::endl;
