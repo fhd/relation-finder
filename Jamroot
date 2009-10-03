@@ -1,0 +1,7 @@
+project wbd
+	: build-dir bin
+	: default-build release
+	;
+
+build-project src/wbd ;
+build-project test/wbd ;

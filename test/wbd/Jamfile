@@ -1,0 +1,11 @@
+import testing ;
+
+use-project /wbd_lib : ../../src/wbd ;
+
+unit-test graph_searcher_test
+	: graph_searcher_test.cpp
+	  /wbd_lib//graph_searcher
+	  boost_unit_test_framework
+	;
+
+lib boost_unit_test_framework ;

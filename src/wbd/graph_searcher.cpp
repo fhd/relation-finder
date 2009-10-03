@@ -15,7 +15,7 @@ graph_searcher::~graph_searcher()
 }
 
 graph::path_t *graph_searcher::find_shortest_path(graph::node_t start,
-	graph::node_t goal, int depth_limit)
+	graph::node_t goal, unsigned int depth_limit)
 {
 	graph::agenda_t agenda;
 	graph::nodes_t memtable;
@@ -26,7 +26,7 @@ graph::path_t *graph_searcher::find_shortest_path(graph::node_t start,
 }
 
 graph::path_t *graph_searcher::find_breadth_first(graph::agenda_t &agenda,
-	graph::nodes_t &memtable, graph::node_t goal, int depth_limit)
+	graph::nodes_t &memtable, graph::node_t goal, unsigned int depth_limit)
 {
 #if 0
 	std::cout << "breath_first:" << std::endl;
