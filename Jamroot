@@ -1,6 +1,7 @@
 project wbd
-	: build-dir bin
+	: requirements <threading>multi
 	: default-build release
+	: build-dir bin
 	;
 
 build-project src/wbd ;

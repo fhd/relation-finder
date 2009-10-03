@@ -13,7 +13,7 @@ std::string path_to_string(graph::path_t &path)
 {
 	std::stringstream s;
 	s << "[";
-	BOOST_FOREACH (int node, path) {
+	BOOST_FOREACH (unsigned int node, path) {
 			s << node;
 			if (node != path.back())
 				s << " -> ";
@@ -26,7 +26,7 @@ void check_path(graph::path_t &expected_path, graph::path_t &path)
 {
 	BOOST_REQUIRE_EQUAL(expected_path.size(), path.size());
 
-	for (int i = 0; i < expected_path.size(); i++)
+	for (unsigned int i = 0; i < expected_path.size(); i++)
 		if (expected_path.at(i) != path.at(i))
 			BOOST_ERROR("Incorrect path: Expected "
 				<< path_to_string(expected_path)

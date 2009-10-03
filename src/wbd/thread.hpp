@@ -1,6 +1,7 @@
 #ifndef THREAD_HPP
 #define THREAD_HPP
 
+#include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 
