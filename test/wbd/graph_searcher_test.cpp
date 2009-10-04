@@ -14,9 +14,9 @@ std::string path_to_string(graph::path_t &path)
 	std::stringstream s;
 	s << "[";
 	BOOST_FOREACH (unsigned int node, path) {
-			s << node;
-			if (node != path.back())
-				s << " -> ";
+		s << node;
+		if (node != path.back())
+			s << " -> ";
 	}
 	s << "]";
 	return s.str();
