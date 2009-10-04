@@ -29,8 +29,8 @@ void check_path(graph::path_t &expected_path, graph::path_t &path)
 	for (unsigned int i = 0; i < expected_path.size(); i++)
 		if (expected_path.at(i) != path.at(i))
 			BOOST_ERROR("Incorrect path: Expected "
-				<< path_to_string(expected_path)
-				<< " but got " << path_to_string(path) << ".");
+					<< path_to_string(expected_path)
+					<< " but got " << path_to_string(path) << ".");
 }
 
 BOOST_AUTO_TEST_CASE(test_simple_path)
@@ -38,8 +38,7 @@ BOOST_AUTO_TEST_CASE(test_simple_path)
 	// Setting up the fixture
 	graph::graph_t graph;
 
-	graph::nodes_t edge0, edge1, edge2, edge3, edge4, edge5, edge6,
-		edge7;
+	graph::nodes_t edge0, edge1, edge2, edge3, edge4, edge5, edge6,	edge7;
 	edge1.push_back(2);
 	edge1.push_back(3);
 	edge2.push_back(1);
