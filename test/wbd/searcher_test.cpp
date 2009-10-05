@@ -1,11 +1,11 @@
 #include <string>
 
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE graph_searcher
+#define BOOST_TEST_MODULE searcher
 #include <boost/test/unit_test.hpp>
 #include <boost/foreach.hpp>
 
-#include "../../src/wbd/graph_searcher.hpp"
+#include "../../src/wbd/searcher.hpp"
 
 // TODO: Write some more tests.
 
@@ -70,7 +70,7 @@ BOOST_AUTO_TEST_CASE(test_simple_path)
 	expected_path.push_back(7);
 
 	// Calculate the way from 1 to 7
-	graph_searcher *s = new graph_searcher(graph);
+	searcher *s = new searcher(graph);
 	graph::path_t *path = s->find_shortest_path(1, 7, 5);
 
 	// Check the result

@@ -1,2 +1,49 @@
-This is a rewrite of the infamous "Wanjas Beziehungs Daemon"
-using the boost C++ libraries.
+WBD - Wanja's Beziehungs Daemon
+
+A daemon calculating the shortest path between two people in a social network.
+
+This is open source software, licened unter the conditions of the MIT license.
+See the file COPYING for details.
+
+
+ABOUT
+=====
+WBD regularly fetches the relationships between people from the database of a
+social networking site.
+It listens for incoming network connections asking for the shortest path
+between two people and calculates it based on their transitive relationships.
+
+This is a rewrite of the infamous "Wanjas Beziehungs Daemon" because that one
+did apparently have some memory leak problems I was unable to detect.
+Instead of Qt, this one uses the boost C++ libraries, which I consider as a
+more reasonable approach for a daemon.
+The search algorithm should be better too :)
+
+
+COMPILING
+=========
+This is what you'll need in order to build WBD yourself:
+
+Boost (at least version 1.34)
+In particular, the following libraries:
+- Boost.Thread
+- Boost.Test
+- Boost.Asio
+
+You will also need Boost.Build (AKA bjam).
+
+On a Debian system, the required packages are:
+- libboost-dev
+- libasio-dev
+- boost-build
+
+Once you've made sure that everything is in place, type:
+bjam
+
+After the build process is finished, the desired binary - wbd - resides
+somewhere in bin/src.
+
+
+AUTHOR
+======
+Written by Felix H. Dahlke <fhd@ubercode.de>.

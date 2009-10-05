@@ -1,11 +1,17 @@
 import testing ;
 
 exe wbd
-	: main.cpp thread.cpp client.cpp graph_searcher boost_thread
+	: main.cpp
+	  thread.cpp
+	  client.cpp
+	  server.cpp
+	  fetcher.cpp
+	  searcher
+	  boost_thread
 	;
 
-lib graph_searcher
-	: graph_searcher.cpp
+lib searcher
+	: searcher.cpp
 	;
 
 lib boost_thread ;

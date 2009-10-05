@@ -2,9 +2,9 @@ import testing ;
 
 use-project /wbd_lib : ../../src/wbd ;
 
-unit-test graph_searcher_test
-	: graph_searcher_test.cpp
-	  /wbd_lib//graph_searcher
+unit-test searcher_test
+	: searcher_test.cpp
+	  /wbd_lib//searcher
 	  boost_unit_test_framework
 	;
 

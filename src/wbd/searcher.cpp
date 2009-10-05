@@ -1,20 +1,15 @@
-#include <cassert>
-#include <algorithm>
-#include <iostream>
-#include <boost/foreach.hpp>
+#include "searcher.hpp"
 
-#include "graph_searcher.hpp"
-
-graph_searcher::graph_searcher(graph::graph_t &graph)
+searcher::searcher(graph::graph_t &graph)
 : m_graph(graph)
 {
 }
 
-graph_searcher::~graph_searcher()
+searcher::~searcher()
 {
 }
 
-graph::path_t *graph_searcher::find_shortest_path(graph::node_t start,
+graph::path_t *searcher::find_shortest_path(graph::node_t start,
 		graph::node_t goal, unsigned int depth_limit)
 {
 	graph::agenda_t agenda;
@@ -25,7 +20,7 @@ graph::path_t *graph_searcher::find_shortest_path(graph::node_t start,
 	return find_breadth_first(agenda, memtable, goal, depth_limit);
 }
 
-graph::path_t *graph_searcher::find_breadth_first(graph::agenda_t &agenda,
+graph::path_t *searcher::find_breadth_first(graph::agenda_t &agenda,
 		graph::nodes_t &memtable, graph::node_t goal, unsigned int depth_limit)
 {
 #if 0
@@ -75,7 +70,7 @@ graph::path_t *graph_searcher::find_breadth_first(graph::agenda_t &agenda,
 	return find_breadth_first(agenda, memtable, goal, depth_limit);
 }
 
-graph::nodes_t graph_searcher::find_successors(graph::node_t current,
+graph::nodes_t searcher::find_successors(graph::node_t current,
 		graph::nodes_t &memtable)
 {
 	graph::nodes_t successors;

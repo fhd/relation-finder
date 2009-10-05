@@ -1,8 +1,12 @@
 #ifndef SEARCH_HPP
 #define SEARCH_HPP
 
+#include <cassert>
+#include <algorithm>
+#include <iostream>
 #include <map>
 #include <deque>
+#include <boost/foreach.hpp>
 
 /** Contains types for building and searching a graph */
 namespace graph
@@ -24,14 +28,14 @@ namespace graph
 }
 
 /** Searches a graph. */
-class graph_searcher
+class searcher
 {
 public:
 	/** Constructor that sets the graph to the given value */
-	graph_searcher(graph::graph_t &graph);
+	searcher(graph::graph_t &graph);
 
 	/** Destructor */
-	~graph_searcher();
+	~searcher();
 
 	/**
 	 * Returns the shortest path from start to goal.

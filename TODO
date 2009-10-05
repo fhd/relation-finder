@@ -1,7 +1,5 @@
 - Create more unit tests for the graph_searcher class
-- Use the graph class from boost
-- Use asio to create a server
-- Write a simple test client
 - Write a db creation script
 - Implement the fetcher (http://soci.sourceforge.net/)
+- Use the boost graph library
 - Fill README

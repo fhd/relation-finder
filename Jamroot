@@ -5,4 +5,5 @@ project wbd
 	;
 
 build-project src/wbd ;
+build-project src/wbdc ;
 build-project test/wbd ;
