@@ -44,6 +44,18 @@ After the build process is finished, the desired binary - wbd - resides
 somewhere in bin/src.
 
 
+RUNNING
+=======
+Once you've built WBD, you've automatically build a couple of programs:
+- wbd	-- the daemon himself
+- wbdc	-- a very simple client
+
+What you'll want to do is run WBD. In order to do that, just execute it.
+It will then run as a daemon, listening on port 8888 for incoming connections.
+
+If you want to see if it's working properly, use wbdc.
+
+
 AUTHOR
 ======
 Written by Felix H. Dahlke <fhd@ubercode.de>.

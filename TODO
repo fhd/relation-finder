@@ -2,4 +2,4 @@
 - Write a db creation script
 - Implement the fetcher (http://soci.sourceforge.net/)
 - Use the boost graph library
-- Fill README
+- Scan for memory leaks and fix them
