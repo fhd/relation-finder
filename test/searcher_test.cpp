@@ -4,8 +4,9 @@
 #define BOOST_TEST_MODULE searcher
 #include <boost/test/unit_test.hpp>
 #include <boost/foreach.hpp>
+#include <boost/shared_ptr.hpp>
 
-#include "../../src/wbd/searcher.hpp"
+#include "../src/searcher.hpp"
 
 // TODO: Write some more tests.
 
@@ -71,7 +72,7 @@ BOOST_AUTO_TEST_CASE(test_simple_path)
 
 	// Calculate the way from 1 to 7
 	searcher *s = new searcher(graph);
-	graph::path_t *path = s->find_shortest_path(1, 7, 5);
+	boost::shared_ptr<graph::path_t> path = s->find_shortest_path(1, 7, 5);
 
 	// Check the result
 	BOOST_REQUIRE_MESSAGE(path, "No path was found.");

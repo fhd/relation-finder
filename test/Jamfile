@@ -1,6 +1,6 @@
 import testing ;
 
-use-project /wbd_lib : ../../src/wbd ;
+use-project /wbd_lib : ../src ;
 
 unit-test searcher_test
 	: searcher_test.cpp

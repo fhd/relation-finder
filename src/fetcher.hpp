@@ -1,11 +1,11 @@
 #ifndef FETCHER_HPP
 #define FETCHER_HPP
 
-#include "thread.hpp"
+#include <boost/thread/mutex.hpp>
 #include "searcher.hpp"
 
 /** Reads relations regularly from the database */
-class fetcher : public thread
+class fetcher
 {
 public:
 	/** Singleton instance getter */
@@ -14,17 +14,16 @@ public:
 	/** Returns the last read relations */
 	graph::graph_t get_relations();
 
+	/** Fetches new relations from the database regularly */
+	void fetch();
+
 private:
-	static fetcher *m_instance;
-	graph::graph_t m_relations;
+	// TODO: Use a shared pointer for the instance?
+	static fetcher *instance_;
+	graph::graph_t relations_;
+	boost::mutex relations_mutex_;
 
-	/** Constructor */
 	fetcher();
-
-	/** Destructor */
-	~fetcher();
-
-	void run();
 };
 
 #endif /* FETCHER_HPP */

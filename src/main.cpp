@@ -1,4 +1,7 @@
-#include "server.hpp"
+#include <iostream>
+#include <asio.hpp>
+#include "fetcher.hpp"
+#include "tcp_server.hpp"
 
 int main(int argc, char **argv)
 {
@@ -13,12 +16,14 @@ int main(int argc, char **argv)
 
 	// start the fetcher
 	fetcher *fetcher = fetcher::get_instance();
-	fetcher->start();
+	// TODO: Run as a thread
+	fetcher->fetch();
 
 	// start the server to listen for incoming connections
-	server s;
 	try {
-		s.listen(8888);
+		asio::io_service io_service;
+		tcp_server server(io_service, 8888);
+		io_service.run();
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 	}

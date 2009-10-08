@@ -4,6 +4,6 @@ project wbd
 	: build-dir bin
 	;
 
-build-project src/wbd ;
-build-project src/wbdc ;
-build-project test/wbd ;
+build-project src ;
+build-project src/tools/wbdc ;
+build-project test ;

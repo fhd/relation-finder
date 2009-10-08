@@ -1,31 +1,8 @@
 #ifndef SEARCH_HPP
 #define SEARCH_HPP
 
-#include <cassert>
-#include <algorithm>
-#include <iostream>
-#include <map>
-#include <deque>
-#include <boost/foreach.hpp>
-
-/** Contains types for building and searching a graph */
-namespace graph
-{
-	/** A node in a graph */
-	typedef unsigned int node_t;
-
-	/** Multiple nodes */
-	typedef std::deque <node_t> nodes_t;
-
-	/** A path through a graph */
-	typedef std::deque <node_t> path_t;
-
-	/** A graph **/
-	typedef std::map <node_t, nodes_t> graph_t;
-
-	/** An agenda for a search algorithm */
-	typedef std::deque <path_t> agenda_t;
-}
+#include <boost/shared_ptr.hpp>
+#include "graph.hpp"
 
 /** Searches a graph. */
 class searcher
@@ -34,19 +11,16 @@ public:
 	/** Constructor that sets the graph to the given value */
 	searcher(graph::graph_t &graph);
 
-	/** Destructor */
-	~searcher();
-
 	/**
 	 * Returns the shortest path from start to goal.
 	 * Stops once the depth limit is reached.
 	 * Returns NULL if no path could be found.
 	 */
-	graph::path_t *find_shortest_path(graph::node_t start, graph::node_t goal,
-			unsigned int depth_limit);
+	boost::shared_ptr<graph::path_t> find_shortest_path(graph::node_t start,
+			graph::node_t goal, unsigned int depth_limit);
 
 private:
-	graph::graph_t m_graph;
+	graph::graph_t graph_;
 
 	/**
 	 * Performs a depth-limited breadth-first search to find the shortest
@@ -54,7 +28,7 @@ private:
 	 * Uses a memoisation table to never expand the same node twice.
 	 * Stops once the depth limit is reached, .
 	 */
-	graph::path_t *find_breadth_first(graph::agenda_t &agenda,
+	boost::shared_ptr<graph::path_t> find_breadth_first(graph::agenda_t &agenda,
 			graph::nodes_t &memtable, graph::node_t goal,
 			unsigned int depth_limit);
 
