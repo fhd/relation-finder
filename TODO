@@ -1,5 +1,5 @@
 - Create more unit tests for the graph_searcher class
-- Write a db creation script
 - Implement the fetcher (http://soci.sourceforge.net/)
-- Use the boost graph library
+- Write a db creation script
+- Use the boost graph library (?)
 - Scan for memory leaks and fix them
