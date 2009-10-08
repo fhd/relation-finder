@@ -1,5 +1,14 @@
-- Create more unit tests for the graph_searcher class
-- Implement the fetcher (http://soci.sourceforge.net/)
-- Write a db creation script
-- Use the boost graph library (?)
-- Scan for memory leaks and fix them
+Release goals for 0.1:
+======================
+- Implement the fetcher (http://soci.sourceforge.net/).
+- Write a db creation script.
+- Thoroughly scan for memory leaks and fix them.
+- Provide the compulsory --help and --version commandline options.
+- Read the daemon's port, the db fetching interval and the search algorithm's
+  depth limit from commandline options.
+- Handle symbols properly, especially SIG_TERM
+
+
+Ideas
+=====
+- Use the boost graph library (Or not? Looks cumbersome).

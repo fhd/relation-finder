@@ -27,8 +27,8 @@ This is what you'll need in order to build WBD yourself:
 Boost (at least version 1.34)
 In particular, the following libraries:
 - Boost.Thread
-- Boost.Test
 - Boost.Asio
+- Boost.Test
 
 You will also need Boost.Build (AKA bjam).
 
@@ -46,7 +46,7 @@ somewhere in bin/src.
 
 RUNNING
 =======
-Once you've built WBD, you've automatically build a couple of programs:
+After compiling WBD, you've automatically built a couple of programs:
 - wbd	-- the daemon himself
 - wbdc	-- a very simple client
 
