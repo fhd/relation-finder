@@ -5,7 +5,7 @@
 #include "fetcher.hpp"
 #include "tcp_server.hpp"
 
-/** A thread functor updating the relations */
+/** A thread functor, updating the relations */
 struct fetcher_thread
 {
 	fetcher_thread(unsigned int fetch_interval)
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 	// start the fetcher
 	boost::thread thread(fetcher_thread(300));
 
-	// start the server to listen for incoming connections
+	// start the server and listen for incoming connections
 	try {
 		asio::io_service io_service;
 		tcp_server server(io_service, 8888);

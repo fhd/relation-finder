@@ -19,7 +19,8 @@ void tcp_server::start_accept()
 				asio::placeholders::error));
 }
 
-void tcp_server::handle_accept(boost::shared_ptr<tcp_connection> new_connection,
+void tcp_server::handle_accept(
+		boost::shared_ptr<tcp_connection> new_connection,
 		const asio::error_code &error)
 {
 	if (!error) {

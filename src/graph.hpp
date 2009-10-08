@@ -10,17 +10,17 @@ namespace graph
 	/** A node in a graph */
 	typedef unsigned int node_t;
 
-	/** Multiple nodes */
+	/** A list of nodes */
 	typedef std::deque<node_t> nodes_t;
 
 	/** A path through a graph */
 	typedef std::deque<node_t> path_t;
 
+	/** An agenda for search algorithms */
+	typedef std::deque<path_t> agenda_t;
+
 	/** A graph **/
 	typedef std::map<node_t, nodes_t> graph_t;
-
-	/** An agenda for a search algorithm */
-	typedef std::deque<path_t> agenda_t;
 }
 
 #endif /* GRAPH_HPP */

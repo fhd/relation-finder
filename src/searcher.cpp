@@ -64,8 +64,8 @@ graph::nodes_t searcher::find_successors(graph::node_t current,
 	// Find all successors that are not yet on the memoisation table
 	graph::nodes_t siblings = iter->second;
 	BOOST_FOREACH (graph::node_t sibling, siblings) {
-		graph::nodes_t::iterator miter = find(memtable.begin(), memtable.end(),
-				sibling);
+		graph::nodes_t::iterator miter = find(memtable.begin(),
+				memtable.end(), sibling);
 		if (miter == memtable.end()) {
 			memtable.push_back(sibling);
 			successors.push_back(sibling);
