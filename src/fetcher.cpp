@@ -1,12 +1,13 @@
 #include "fetcher.hpp"
 
-fetcher *fetcher::instance_ = NULL;
+boost::shared_ptr<fetcher> fetcher::instance_ = boost::shared_ptr<fetcher>();
+boost::mutex fetcher::instance_mutex_;
 
-fetcher *fetcher::get_instance()
+boost::shared_ptr<fetcher> fetcher::get_instance()
 {
-	// TODO: Make thread-safe
+	boost::mutex::scoped_lock lock(instance_mutex_);
 	if (!instance_)
-		instance_ = new fetcher();
+		instance_ = boost::shared_ptr<fetcher>(new fetcher());
 	return instance_;
 }
 
@@ -18,7 +19,10 @@ graph::graph_t fetcher::get_relations()
 
 void fetcher::fetch()
 {
-	// TODO: Actually fetch the relations from the database in a loop
+	relations_.clear();
+
+	// TODO: Actually fetch the relations from the database
+	boost::mutex::scoped_lock lock(relations_mutex_);
 	graph::nodes_t edge0, edge1, edge2, edge3, edge4, edge5, edge6,	edge7;
 	edge1.push_back(2);
 	edge1.push_back(3);

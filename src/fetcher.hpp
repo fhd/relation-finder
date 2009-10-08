@@ -1,6 +1,7 @@
 #ifndef FETCHER_HPP
 #define FETCHER_HPP
 
+#include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
 #include "searcher.hpp"
 
@@ -9,7 +10,7 @@ class fetcher
 {
 public:
 	/** Singleton instance getter */
-	static fetcher *get_instance();
+	static boost::shared_ptr<fetcher> get_instance();
 
 	/** Returns the last read relations */
 	graph::graph_t get_relations();
@@ -18,8 +19,8 @@ public:
 	void fetch();
 
 private:
-	// TODO: Use a shared pointer for the instance?
-	static fetcher *instance_;
+	static boost::shared_ptr<fetcher> instance_;
+	static boost::mutex instance_mutex_;
 	graph::graph_t relations_;
 	boost::mutex relations_mutex_;
 
