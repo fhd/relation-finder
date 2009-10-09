@@ -7,14 +7,20 @@
 class tcp_server
 {
 	public:
-		tcp_server(asio::io_service &io_service, unsigned int port);
+		/**
+		 * Constructor creating a new multiclient server using the supplied
+		 * depth limit when invoking the search algorithm.
+		 */
+		tcp_server(asio::io_service &io_service, unsigned int port,
+				unsigned int depth_limit);
 
 	private:
+		asio::ip::tcp::acceptor acceptor_;
+		unsigned int depth_limit_;
+
 		void start_accept();
 		void handle_accept(boost::shared_ptr<tcp_connection> new_connection,
 				const asio::error_code &error);
-
-		asio::ip::tcp::acceptor acceptor_;
 };
 
 #endif /* TCP_SERVER_HPP */

@@ -1,4 +1,4 @@
-WBD - Wanja's Beziehungs Daemon
+wbd - Wanja's Beziehungs Daemon
 
 A daemon calculating the shortest path between two people in a social network.
 
@@ -8,7 +8,7 @@ See the file COPYING for details.
 
 ABOUT
 =====
-WBD regularly fetches the relationships between people from the database of a
+wbd regularly fetches the relationships between people from the database of a
 social networking site.
 It listens for incoming network connections asking for the shortest path
 between two people and calculates it based on their transitive relationships.
@@ -22,12 +22,15 @@ The search algorithm should be better too :)
 
 COMPILING
 =========
-This is what you'll need in order to build WBD yourself:
+This is what you'll need in order to build wbd yourself:
 
 Boost (at least version 1.34)
 In particular, the following libraries:
-- Boost.Thread
 - Boost.Asio
+- Boost.Assignment
+- Boost.Foreach
+- Boost.Program_options
+- Boost.Thread
 - Boost.Test
 
 You will also need Boost.Build (AKA bjam).
@@ -46,12 +49,12 @@ somewhere in bin/src.
 
 RUNNING
 =======
-After compiling WBD, you've automatically built a couple of programs:
+After compiling wbd, you've automatically built a couple of programs:
 - wbd	-- the daemon himself
-- wbdc	-- a very simple client
+- wbdc	-- a very simple client documenting wbd's protocol
 
-What you'll want to do is run WBD. In order to do that, just execute it.
-It will then run as a daemon, listening on port 8888 for incoming connections.
+What you'll want to do is run wbd. To see how it's used, execute:
+wbd --help
 
 If you want to see if it's working properly, use wbdc.
 

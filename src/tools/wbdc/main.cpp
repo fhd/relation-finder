@@ -1,24 +1,38 @@
+/*
+ * This is an example client for wbd, demonstrating its protocol
+ * using Boost.Asio for network communication.
+ *
+ * The protocol is pretty simple, the only data send is a couple of
+ * 32 bit unsigned integers. It basically works like this:
+ * 1. Connect to wbd via TCP.
+ * 2. Send the user ID of the first person (user A).
+ * 3. Send the user ID of the second person (user B).
+ * 4. Read the length of path.
+ *    If that number is 0, no path could be found.
+ * 5. Read as many user IDs as the path was long.
+ *    This is the result, the path from user A to user B.
+ */
+
 #include <string>
 #include <iostream>
 #include <boost/array.hpp>
 #include <asio.hpp>
 
-#define HOST "localhost"
-#define PORT 8888
-
 using asio::ip::tcp;
 
-unsigned int read_uint(tcp::socket &socket)
+/** Utility method for reading an unsigned integer */
+uint32_t read_uint(tcp::socket &socket)
 {
 	asio::error_code error;
-	unsigned int uint;
+	uint32_t uint;
 	socket.read_some(asio::buffer((void *) &uint, sizeof(uint)), error);
 	if (error)
 		throw asio::system_error(error);
 	return uint;
 }
 
-void write_uint(tcp::socket &socket, unsigned int uint)
+/** Utility method for writing an unsigned integer */
+void write_uint(tcp::socket &socket, uint32_t uint)
 {
 	asio::error_code error;
 	socket.write_some(asio::buffer((void *) &uint, sizeof(uint)), error);
@@ -28,26 +42,29 @@ void write_uint(tcp::socket &socket, unsigned int uint)
 
 int main(int argc, char *argv[])
 {
+	// Read request parameters from stdin
 	std::string host, port;
-	unsigned int pid, fid;
-	std::cout << "WBD's host: ";
+	unsigned int pid, apid;
+	std::cout << "This tool will ask wbd for a connection between two people."
+			<< std::endl;
+	std::cout << "wbd's host: ";
 	std::cin >> host;
-	std::cout << "WBD's port: ";
+	std::cout << "wbd's port: ";
 	std::cin >> port;
-	std::cout << "Your ID: ";
+	std::cout << "A person's ID: ";
 	std::cin >> pid;
-	std::cout << "Your friend's ID: ";
-	std::cin >> fid;
+	std::cout << "Another person's ID: ";
+	std::cin >> apid;
 
 	try {
-		// resolve the host
+		// Resolve the host
 		asio::io_service io_service;
 		tcp::resolver resolver(io_service);
 		tcp::resolver::query query(host, port);
 		tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
 		tcp::resolver::iterator end;
 
-		// connect to the server
+		// Connect to the server
 		tcp::socket socket(io_service);
 		asio::error_code error = asio::error::host_not_found;
 		while (error && endpoint_iterator != end) {
@@ -57,18 +74,20 @@ int main(int argc, char *argv[])
 		if (error)
 			throw asio::system_error(error);
 
-		// write the person's id
+		// Write the person's id
 		write_uint(socket, pid);
 
-		// write the friend's id
-		write_uint(socket, fid);
+		// Write the other person's id
+		write_uint(socket, apid);
 
-		// read the lenght of the path
+		// Read the length of the path
 		int path_length = read_uint(socket);
 		if (path_length == 0) {
-			std::cout << "no path was found." << std::endl;
+			std::cout << "No path was found." << std::endl;
 		} else {
-			std::cout << "found a path: ";
+			std::cout << "Found a path: ";
+
+			// Read the path
 			for (int i = 0; i < path_length; i++) {
 				unsigned int node = read_uint(socket);
 				std::cout << node;
