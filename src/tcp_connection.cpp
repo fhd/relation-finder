@@ -1,4 +1,3 @@
-#include <iostream>
 #include "fetcher.hpp"
 #include "tcp_connection.hpp"
 
