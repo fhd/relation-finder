@@ -1,8 +1,8 @@
-wbd - Wanja's Beziehungs Daemon
+wbd - Wanjas Beziehungs Daemon
 
 A daemon calculating the shortest path between two people in a social network.
 
-This is open source software, licened unter the conditions of the MIT license.
+This is open source software, licensed under the MIT license.
 See the file COPYING for details.
 
 
@@ -11,13 +11,14 @@ ABOUT
 wbd regularly fetches the relationships between people from the database of a
 social networking site.
 It listens for incoming network connections asking for the shortest path
-between two people and calculates it based on their transitive relationships.
+between two people (via other people) and calculates it.
 
 This is a rewrite of the infamous "Wanjas Beziehungs Daemon" because that one
 did apparently have some memory leak problems I was unable to detect.
-Instead of Qt, this one uses the boost C++ libraries, which I consider as a
+Instead of Qt, this one uses the boost C++ libraries, which I consider a
 more reasonable approach for a daemon.
-The search algorithm should be better too :)
+The search algorithm should be better too, I created it while studying the
+subject intensively :)
 
 
 COMPILING

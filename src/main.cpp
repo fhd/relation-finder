@@ -12,7 +12,7 @@
 		"in a social network."
 #define USAGE_TEXT "Usage: wbd [OPTION]..."
 #define VERSION_TEXT \
-		"wbd (Wanja's Beziehungs Daemon) "VERSION"\n"\
+		"wbd (Wanjas Beziehungs Daemon) "VERSION"\n"\
 		"Copyright (C) 2009 Felix H. Dahlke.\n"\
 		"Licensed under the MIT License."
 
