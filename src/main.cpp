@@ -59,19 +59,28 @@ bool parse_options(int argc, char *argv[],
 	namespace po = boost::program_options;
 	po::options_description options("Options");
 	options.add_options()
-		("port", po::value<unsigned int>(&port)->default_value(DEFAULT_PORT),
-				"set the tcp port")
-		("fetching-interval",
-		 		po::value<unsigned int>(&fetching_interval)->default_value(
+		(
+			"port",
+			po::value<unsigned int>(&port)->default_value(DEFAULT_PORT),
+			"set the tcp port"
+		)
+		(
+			"fetching-interval",
+			po::value<unsigned int>(&fetching_interval)->default_value(
 					DEFAULT_FETCHING_INTERVAL),
-				"set the time (in seconds) to wait before fetching new relations from the database")
-		("depth-limit",
-		 		po::value<unsigned int>(&depth_limit)->default_value(
+			"set the time (in seconds) to wait before fetching new relations \
+from the database"
+		)
+		(
+			"depth-limit",
+			po::value<unsigned int>(&depth_limit)->default_value(
 					DEFAULT_DEPTH_LIMIT),
-				"set the maximum length of relationship paths")
+			"set the maximum length of relationship paths"
+		)
 		("verbose", "explain what is happening")
 		("help", "display this help and exit")
-		("version",	"output version information and exit");
+		("version",	"output version information and exit")
+	;
 
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc, argv, options), vm);
