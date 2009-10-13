@@ -1,6 +1,5 @@
 Release goals for 0.1:
 ======================
-- Improve the jam file, have targets "all", "test" etc.
 - Implement the fetcher (http://soci.sourceforge.net/).
 - Handle unix signals properly, especially SIGTERM.
 - Thoroughly scan for memory leaks and fix them.
