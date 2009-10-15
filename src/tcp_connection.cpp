@@ -38,9 +38,8 @@ void tcp_connection::start()
 }
 
 tcp_connection::tcp_connection(asio::io_service &io_service,
-		unsigned int depth_limit)
-: socket_(io_service)
-, depth_limit_(depth_limit)
+		unsigned int depth_limit) : socket_(io_service),
+		depth_limit_(depth_limit)
 {
 }
 

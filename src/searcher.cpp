@@ -1,8 +1,7 @@
 #include <boost/foreach.hpp>
 #include "searcher.hpp"
 
-searcher::searcher(graph::graph_t &graph)
-: graph_(graph)
+searcher::searcher(graph::graph_t &graph) : graph_(graph)
 {
 }
 

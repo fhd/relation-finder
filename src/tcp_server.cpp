@@ -4,9 +4,9 @@
 using asio::ip::tcp;
 
 tcp_server::tcp_server(asio::io_service &io_service, unsigned int port,
-		unsigned int depth_limit)
-: acceptor_(io_service, tcp::endpoint(tcp::v4(), port))
-, depth_limit_(depth_limit)
+		unsigned int depth_limit) :
+		acceptor_(io_service, tcp::endpoint(tcp::v4(), port)),
+		depth_limit_(depth_limit)
 {
 	start_accept();
 }
