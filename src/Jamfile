@@ -6,6 +6,7 @@ exe wbd
 	  tcp_server.cpp
 	  tcp_connection.cpp
 	  searcher
+	  boost_filesystem
 	  boost_program_options
 	  boost_thread
 	;
@@ -14,5 +15,6 @@ lib searcher
 	: searcher.cpp
 	;
 
+lib boost_filesystem ;
 lib boost_program_options ;
 lib boost_thread ;

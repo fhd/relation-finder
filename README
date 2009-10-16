@@ -30,6 +30,7 @@ In particular, the following libraries:
 - Boost.Asio
 - Boost.Assignment
 - Boost.Foreach
+- Boost.Filesystem
 - Boost.Program_options
 - Boost.Thread
 - Boost.Test

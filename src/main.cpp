@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 #include <boost/thread.hpp>
 #include <boost/thread/xtime.hpp>
@@ -19,6 +22,7 @@
 #define DEFAULT_PORT 8888
 #define DEFAULT_FETCHING_INTERVAL 300
 #define DEFAULT_DEPTH_LIMIT 5
+#define CONFIG_FILE "wbd.cfg"
 
 /** A thread functor, updating the relations */
 struct fetcher_thread
@@ -49,7 +53,10 @@ struct fetcher_thread
 	bool verbose_;
 };
 
-/** Parses commandline options, returns true if the program should continue. */
+/**
+ * Parses options from the commandline and from the configuration file,
+ * returns true if the program should continue.
+ */
 bool parse_options(int argc, char *argv[],
 		unsigned int &port,
 		unsigned int &fetching_interval,
@@ -83,7 +90,27 @@ from the database"
 	;
 
 	po::variables_map vm;
+
+	// Read options from the configuration file	
+	namespace fs = boost::filesystem;
+	std::string config_file;
+
+	// TODO: Check only for /usr/local if it's installed there
+	if (fs::exists("etc/"CONFIG_FILE))
+		config_file = "etc/"CONFIG_FILE;
+	else if (fs::exists("/usr/local/etc/"CONFIG_FILE))
+		config_file = "/usr/local/etc/"CONFIG_FILE;
+	else if (fs::exists("/etc/"CONFIG_FILE))
+		config_file = "/etc/"CONFIG_FILE;
+
+	if (config_file.size() > 0) {
+		std::ifstream ifs(config_file.c_str());
+		po::store(po::parse_config_file(ifs, options), vm);
+	}
+
+	// Read the command line options
 	po::store(po::parse_command_line(argc, argv, options), vm);
+
 	po::notify(vm);
 
 	if (vm.count("help")) {
@@ -97,7 +124,7 @@ from the database"
 		std::cout << VERSION_TEXT << std::endl;
 		return false;
 	}
-
+	
 	verbose = vm.count("verbose");
 
 	return true;
