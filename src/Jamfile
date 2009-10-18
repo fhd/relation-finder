@@ -2,6 +2,7 @@ import testing ;
 
 exe wbd
 	: main.cpp
+	  options.cpp
 	  fetcher.cpp
 	  tcp_server.cpp
 	  tcp_connection.cpp
