@@ -95,11 +95,12 @@ from the database"
 	namespace fs = boost::filesystem;
 	std::string config_file;
 
-	// TODO: Check only for /usr/local if it's installed there
+	// TODO: Find the paths relative to the binary, not the cwd
+	// Locate the configuration file
 	if (fs::exists("etc/"CONFIG_FILE))
 		config_file = "etc/"CONFIG_FILE;
-	else if (fs::exists("/usr/local/etc/"CONFIG_FILE))
-		config_file = "/usr/local/etc/"CONFIG_FILE;
+	else if (fs::exists("../etc/"CONFIG_FILE))
+		config_file = "../etc/"CONFIG_FILE;
 	else if (fs::exists("/etc/"CONFIG_FILE))
 		config_file = "/etc/"CONFIG_FILE;
 
