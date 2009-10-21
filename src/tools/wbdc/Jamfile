@@ -1,3 +1,8 @@
+install dist
+	: wbdc
+	: <location>$(DIST_DIR)/bin
+	;
+
 exe wbdc
 	: main.cpp 
 	;

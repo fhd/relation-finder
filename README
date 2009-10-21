@@ -46,7 +46,7 @@ Once you've made sure that everything is in place, type:
 bjam
 
 After the build process is finished, the desired binary - wbd - resides
-somewhere in bin/src.
+in dist/bin.
 
 
 RUNNING
@@ -59,6 +59,15 @@ What you'll want to do is run wbd. To see how it's used, execute:
 wbd --help
 
 If you want to see if it's working properly, use wbdc.
+
+
+INSTALLING
+==========
+To install everything, just invoke the following command:
+bjam -s DIST_DIR=/usr/local
+
+To install just wbd, execute:
+bjam wbd -s DIST_DIR=/usr/local
 
 
 AUTHOR

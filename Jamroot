@@ -1,9 +1,24 @@
+path-constant TOP : . ;
+
+if [ modules.peek : DIST_DIR ]
+{
+	path-constant DIST_DIR : [ modules.peek : DIST_DIR ] ;
+}
+else
+{
+	path-constant DIST_DIR : $(TOP)/dist ;
+}
+
 project wbd
 	: requirements <threading>multi
 	: default-build release
 	: build-dir bin
 	;
 
-build-project src ;
-build-project src/tools/wbdc ;
-build-project test ;
+alias all : wbd wbdc test ;
+
+alias wbd : src ;
+explicit wbd ;
+
+alias wbdc : src/tools/wbdc ;
+explicit wbdc ;

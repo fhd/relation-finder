@@ -129,16 +129,14 @@ boost::shared_ptr<fs::path> options::find_config_file(char *binary_path)
 
 	// The following candidates will be searched in that order
 	std::vector<fs::path> candidates;
-	candidates.push_back(fs::path("etc/"CONFIG_FILE));
+	candidates.push_back(fs::path(bin_dir + "/"CONFIG_FILE));
 	candidates.push_back(fs::path(bin_dir + "/../etc/"CONFIG_FILE));
 	candidates.push_back(fs::path("/etc/"CONFIG_FILE));
 
 	// Check each of the candidates and return the first one that is found
-	BOOST_FOREACH(fs::path candidate, candidates) {
-		std::cout << candidate.string() << std::endl;
+	BOOST_FOREACH(fs::path candidate, candidates)
 		if (fs::exists(candidate))
 			return boost::shared_ptr<fs::path>(new fs::path(candidate));
-	}
 
 	return boost::shared_ptr<fs::path>();
 }
