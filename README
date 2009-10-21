@@ -45,14 +45,14 @@ On a Debian system, the required packages are:
 Once you've made sure that everything is in place, type:
 bjam
 
-After the build process is finished, the desired binary - wbd - resides
+After the build process is finished, the desired binary (wbd) resides
 in dist/bin.
 
 
 RUNNING
 =======
 After compiling wbd, you've automatically built a couple of programs:
-- wbd	-- the daemon himself
+- wbd	-- the daemon itself
 - wbdc	-- a very simple client documenting wbd's protocol
 
 What you'll want to do is run wbd. To see how it's used, execute:
@@ -66,8 +66,13 @@ INSTALLING
 To install everything, just invoke the following command:
 bjam -s DIST_DIR=/usr/local
 
-To install just wbd, execute:
+To install just wbd (recommended), execute:
 bjam wbd -s DIST_DIR=/usr/local
+
+If you would like to remove it for some unreal reason, invoke:
+bjam clean -s DIST_DIR=/usr/local
+
+You can of course use whichever directory you like instead of /usr/local.
 
 
 AUTHOR
