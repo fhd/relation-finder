@@ -1,8 +1,8 @@
 #include <iostream>
-#include <string>
 #include <fstream>
-#include <boost/filesystem.hpp>
+#include <vector>
 #include <boost/program_options.hpp>
+#include <boost/foreach.hpp>
 
 #include "options.hpp"
 
@@ -70,17 +70,9 @@ from the database"
 	po::store(po::parse_command_line(argc, argv, desc), vm);
 
 	// Read options from the configuration file
-	// TODO: Find the paths relative to the binary, not the cwd
-	std::string config_file;
-	if (fs::exists("etc/"CONFIG_FILE))
-		config_file = "etc/"CONFIG_FILE;
-	else if (fs::exists("../etc/"CONFIG_FILE))
-		config_file = "../etc/"CONFIG_FILE;
-	else if (fs::exists("/etc/"CONFIG_FILE))
-		config_file = "/etc/"CONFIG_FILE;
-
-	if (config_file.size() > 0) {
-		std::ifstream ifs(config_file.c_str());
+	boost::shared_ptr<fs::path> config_file = find_config_file(argv[0]);
+	if (config_file != NULL) {
+		std::ifstream ifs(config_file->string().c_str());
 		po::store(po::parse_config_file(ifs, desc), vm);
 	}
 
@@ -127,4 +119,26 @@ bool options::get_verbose()
 
 options::options()
 {
+}
+
+boost::shared_ptr<fs::path> options::find_config_file(char *binary_path)
+{
+	// Find the path to the binary's directory
+	fs::path bin_path(binary_path);
+	std::string bin_dir = bin_path.branch_path().string();
+
+	// The following candidates will be searched in that order
+	std::vector<fs::path> candidates;
+	candidates.push_back(fs::path("etc/"CONFIG_FILE));
+	candidates.push_back(fs::path(bin_dir + "/../etc/"CONFIG_FILE));
+	candidates.push_back(fs::path("/etc/"CONFIG_FILE));
+
+	// Check each of the candidates and return the first one that is found
+	BOOST_FOREACH(fs::path candidate, candidates) {
+		std::cout << candidate.string() << std::endl;
+		if (fs::exists(candidate))
+			return boost::shared_ptr<fs::path>(new fs::path(candidate));
+	}
+
+	return boost::shared_ptr<fs::path>();
 }

@@ -1,8 +1,10 @@
 #ifndef OPTIONS_HPP
 #define OPTIONS_HPP
 
+#include <string>
 #include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
+#include <boost/filesystem.hpp>
 
 /** Reads and provides program options */
 class options
@@ -29,6 +31,9 @@ private:
 	bool verbose_;
 
 	options();
+	/** Looks for the configuration file in several reasonable locations */
+	boost::shared_ptr<boost::filesystem::path> find_config_file(
+			char *binary_path);
 };
 
 #endif /* OPTIONS_HPP */
