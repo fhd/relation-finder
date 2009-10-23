@@ -3,8 +3,3 @@ Release goals for 0.1:
 - Implement the fetcher (http://soci.sourceforge.net/).
 - Handle unix signals properly, especially SIGTERM.
 - Thoroughly scan for memory leaks and fix them.
-
-
-Ideas
-=====
-- Use the boost graph library (Or not? Looks cumbersome).
