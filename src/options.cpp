@@ -20,6 +20,11 @@
 #define DEFAULT_PORT 8888
 #define DEFAULT_FETCHING_INTERVAL 300
 #define DEFAULT_DEPTH_LIMIT 5
+#define DEFAULT_DB_NAME ""
+#define DEFAULT_DB_USER ""
+#define DEFAULT_DB_PASSWORD ""
+#define DEFAULT_DB_HOST "localhost"
+#define DEFAULT_DB_PORT 5432
 
 namespace fs = boost::filesystem;
 namespace po = boost::program_options;
@@ -44,7 +49,7 @@ void options::parse(int argc, char **argv)
 		(
 			"port",
 			po::value<unsigned int>(&port_)->default_value(DEFAULT_PORT),
-			"set the tcp port"
+			"set the tcp port to listen on"
 		)
 		(
 			"fetching-interval",
@@ -58,6 +63,36 @@ from the database"
 			po::value<unsigned int>(&depth_limit_)->default_value(
 					DEFAULT_DEPTH_LIMIT),
 			"set the maximum length of relationship paths"
+		)
+		(
+		 	"db-name",
+			po::value<std::string>(&db_name_)->default_value(
+					DEFAULT_DB_NAME),
+			"set the database name"
+		)
+		(
+		 	"db-user",
+			po::value<std::string>(&db_user_)->default_value(
+					DEFAULT_DB_USER),
+			"set the database user"
+		)
+		(
+		 	"db-password",
+			po::value<std::string>(&db_password_)->default_value(
+					DEFAULT_DB_PASSWORD),
+			"set the database user's password"
+		)
+		(
+		 	"db-host",
+			po::value<std::string>(&db_host_)->default_value(
+					DEFAULT_DB_HOST),
+			"set the database host"
+		)
+		(
+		 	"db-port",
+			po::value<unsigned int>(&db_port_)->default_value(
+					DEFAULT_DB_PORT),
+			"set the database port"
 		)
 		("verbose", "explain what is happening")
 		("help", "display this help and exit")
@@ -115,6 +150,36 @@ bool options::get_verbose()
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return verbose_;
+}
+
+std::string options::get_db_name()
+{
+	boost::mutex::scoped_lock lock(options_mutex_);
+	return db_name_;
+}
+
+std::string options::get_db_user()
+{
+	boost::mutex::scoped_lock lock(options_mutex_);
+	return db_user_;
+}
+
+std::string options::get_db_password()
+{
+	boost::mutex::scoped_lock lock(options_mutex_);
+	return db_password_;
+}
+
+std::string options::get_db_host()
+{
+	boost::mutex::scoped_lock lock(options_mutex_);
+	return db_host_;
+}
+
+unsigned int options::get_db_port()
+{
+	boost::mutex::scoped_lock lock(options_mutex_);
+	return db_port_;
 }
 
 options::options()

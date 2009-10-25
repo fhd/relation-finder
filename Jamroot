@@ -11,6 +11,8 @@ else
 
 project wbd
 	: requirements <threading>multi
+	               <include>/usr/include/soci
+	               <include>/usr/include/postgresql
 	: default-build release
 	: build-dir bin
 	;

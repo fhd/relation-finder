@@ -1,6 +1,8 @@
 #ifndef FETCHER_HPP
 #define FETCHER_HPP
 
+#include <string>
+#include <sstream>
 #include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
 #include "searcher.hpp"
@@ -30,6 +32,16 @@ private:
 	boost::mutex verbose_mutex_;
 
 	fetcher();
+
+	class connect_string_builder
+	{
+	public:
+		void set_option(const std::string &name, const std::string &value);
+		std::string get_string();
+
+	private:
+		std::stringstream stream_;
+	};
 };
 
 #endif /* FETCHER_HPP */

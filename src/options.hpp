@@ -20,6 +20,11 @@ public:
 	unsigned int get_fetching_interval();
 	unsigned int get_depth_limit();
 	bool get_verbose();
+	std::string get_db_name();
+	std::string get_db_user();
+	std::string get_db_password();
+	std::string get_db_host();
+	unsigned int get_db_port();
 
 private:
 	static boost::shared_ptr<options> instance_;
@@ -29,8 +34,14 @@ private:
 	unsigned int fetching_interval_;
 	unsigned int depth_limit_;
 	bool verbose_;
+	std::string db_name_;
+	std::string db_user_;
+	std::string db_password_;
+	std::string db_host_;
+	unsigned int db_port_;
 
 	options();
+
 	/** Looks for the configuration file in several reasonable locations */
 	boost::shared_ptr<boost::filesystem::path> find_config_file(
 			char *binary_path);

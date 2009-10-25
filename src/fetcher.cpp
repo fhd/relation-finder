@@ -1,5 +1,8 @@
 #include <iostream>
-#include <boost/assign.hpp>
+#include <soci/soci.h>
+#include <soci/postgresql/soci-postgresql.h>
+#include "options.hpp"
+#include "util.hpp"
 #include "fetcher.hpp"
 
 boost::shared_ptr<fetcher> fetcher::instance_ = boost::shared_ptr<fetcher>();
@@ -35,15 +38,38 @@ void fetcher::fetch()
 
 	relations_.clear();
 
-	// TODO: Actually fetch the relations from the database
-	using namespace boost::assign;
-	relations_[1] = list_of(2)(3);
-	relations_[2] = list_of(1)(4);
-	relations_[3] = list_of(1)(6);
-	relations_[4] = list_of(2)(5)(6);
-	relations_[5] = list_of(4);
-	relations_[6] = list_of(3)(4)(7);
-	relations_[7] = list_of(6);
+	// Connect to the database
+	boost::shared_ptr<options> opts = options::get_instance();
+	connect_string_builder csb;
+	csb.set_option("dbname", opts->get_db_name());
+	csb.set_option("user", opts->get_db_user());
+	csb.set_option("password", opts->get_db_password());
+	csb.set_option("host", opts->get_db_host());
+	csb.set_option("port", util::convert_to_string<unsigned int>(
+				opts->get_db_port()));
+	SOCI::Session sql(SOCI::postgresql, csb.get_string());
+
+	// Fetch all people
+	int person_no;
+	SOCI::Statement pst = (sql.prepare
+			<< "select distinct owner_nr from buddys",
+			SOCI::into(person_no));
+	pst.execute();
+
+	// Read and store their friends
+	while (pst.fetch()) {
+		relations_[person_no] = graph::nodes_t();
+		graph::nodes_t &friends = relations_[person_no];
+
+		int friend_no;
+		SOCI::Statement fst = (sql.prepare
+				<< "select buddy_nr from buddys where owner_nr = :person_no",
+				SOCI::use(person_no), SOCI::into(friend_no));
+		fst.execute();
+
+		while (fst.fetch())
+			friends.push_back(friend_no);
+	}
 
 	if (verbose_)
 		std::cout << " finished." << std::endl;
@@ -51,4 +77,16 @@ void fetcher::fetch()
 
 fetcher::fetcher()
 {
+}
+
+void fetcher::connect_string_builder::set_option(const std::string &name,
+		const std::string &value)
+{
+	if (!value.empty())
+		stream_ << name << "=" << value << " ";
+}
+
+std::string fetcher::connect_string_builder::get_string()
+{
+	return stream_.str();
 }

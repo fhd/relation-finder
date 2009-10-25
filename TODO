@@ -1,5 +1,4 @@
 Release goals for 0.1:
 ======================
-- Implement the fetcher (http://soci.sourceforge.net/).
 - Handle unix signals properly, especially SIGTERM.
 - Thoroughly scan for memory leaks and fix them.
