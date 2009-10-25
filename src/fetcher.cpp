@@ -16,13 +16,7 @@ boost::shared_ptr<fetcher> fetcher::instance()
 	return instance_;
 }
 
-void fetcher::set_verbose(bool verbose)
-{
-	boost::mutex::scoped_lock lock(verbose_mutex_);
-	verbose_ = verbose;
-}
-
-graph::graph_t fetcher::relations()
+graph::graph_t fetcher::relations() const
 {
 	boost::mutex::scoped_lock lock(relations_mutex_);
 	return relations_;
@@ -30,8 +24,7 @@ graph::graph_t fetcher::relations()
 
 void fetcher::fetch()
 {
-	boost::mutex::scoped_lock vlock(verbose_mutex_);
-	boost::mutex::scoped_lock rlock(relations_mutex_);
+	boost::mutex::scoped_lock lock(relations_mutex_);
 
 	if (verbose_)
 		std::cout << "Fetching new relations from the database ...";
@@ -75,7 +68,7 @@ void fetcher::fetch()
 		std::cout << " finished." << std::endl;
 }
 
-fetcher::fetcher()
+fetcher::fetcher() : verbose_(options::instance()->verbose())
 {
 }
 

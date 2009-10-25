@@ -1,11 +1,13 @@
+#include "options.hpp"
 #include "fetcher.hpp"
+#include "searcher.hpp"
 #include "tcp_connection.hpp"
 
 boost::shared_ptr<tcp_connection> tcp_connection::create(
-		asio::io_service &io_service, unsigned int depth_limit)
+		asio::io_service &io_service)
 {
 	return boost::shared_ptr<tcp_connection>(
-			new tcp_connection(io_service, depth_limit));
+			new tcp_connection(io_service));
 }
 
 asio::ip::tcp::socket &tcp_connection::socket()
@@ -37,9 +39,8 @@ void tcp_connection::start()
 		write_uint(path->at(i));
 }
 
-tcp_connection::tcp_connection(asio::io_service &io_service,
-		unsigned int depth_limit) : socket_(io_service),
-		depth_limit_(depth_limit)
+tcp_connection::tcp_connection(asio::io_service &io_service) :
+		socket_(io_service), depth_limit_(options::instance()->depth_limit())
 {
 }
 

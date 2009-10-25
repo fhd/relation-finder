@@ -13,23 +13,27 @@ public:
 	/** Singleton instance getter */
 	static boost::shared_ptr<options> instance();
 
-	/** Parses options from the command line and the configuration file */
+	/**
+	 * Parses options from the command line and the configuration file.
+	 * Throws an integer exception if execution should be aborted, where the
+	 * integer is the proposed return code for the program.
+	 */
 	void parse(int argc, char **argv);
 
-	unsigned int port();
-	unsigned int fetching_interval();
-	unsigned int depth_limit();
-	bool verbose();
-	std::string db_name();
-	std::string db_user();
-	std::string db_password();
-	std::string db_host();
-	unsigned int db_port();
+	unsigned int port() const;
+	unsigned int fetching_interval() const;
+	unsigned int depth_limit() const;
+	bool verbose() const;
+	std::string db_name() const;
+	std::string db_user() const;
+	std::string db_password() const;
+	std::string db_host() const;
+	unsigned int db_port() const;
 
 private:
 	static boost::shared_ptr<options> instance_;
 	static boost::mutex instance_mutex_;
-	boost::mutex options_mutex_;
+	mutable boost::mutex options_mutex_;
 	unsigned int port_;
 	unsigned int fetching_interval_;
 	unsigned int depth_limit_;
@@ -44,7 +48,7 @@ private:
 
 	/** Looks for the configuration file in several reasonable locations */
 	boost::shared_ptr<boost::filesystem::path> find_config_file(
-			char *binary_path);
+			const char *binary_path) const;
 };
 
 #endif /* OPTIONS_HPP */

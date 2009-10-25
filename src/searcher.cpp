@@ -1,12 +1,13 @@
 #include <boost/foreach.hpp>
 #include "searcher.hpp"
 
-searcher::searcher(graph::graph_t &graph) : graph_(graph)
+searcher::searcher(const graph::graph_t &graph) : graph_(graph)
 {
 }
 
 boost::shared_ptr<graph::path_t> searcher::find_shortest_path(
-		graph::node_t start, graph::node_t goal, unsigned int depth_limit)
+		const graph::node_t &start, const graph::node_t &goal,
+		unsigned int depth_limit) const
 {
 	graph::agenda_t agenda;
 	graph::nodes_t memtable;
@@ -17,8 +18,8 @@ boost::shared_ptr<graph::path_t> searcher::find_shortest_path(
 }
 
 boost::shared_ptr<graph::path_t> searcher::find_breadth_first(
-		graph::agenda_t &agenda, graph::nodes_t &memtable, graph::node_t goal,
-		unsigned int depth_limit)
+		graph::agenda_t &agenda, graph::nodes_t &memtable,
+		const graph::node_t &goal, unsigned int depth_limit) const
 {
 	// A dead end was reached
 	if (agenda.size() == 0)
@@ -51,11 +52,11 @@ boost::shared_ptr<graph::path_t> searcher::find_breadth_first(
 	return find_breadth_first(agenda, memtable, goal, depth_limit);
 }
 
-graph::nodes_t searcher::find_successors(graph::node_t current,
-		graph::nodes_t &memtable)
+graph::nodes_t searcher::find_successors(const graph::node_t &current,
+		graph::nodes_t &memtable) const
 {
 	graph::nodes_t successors;
-	graph::graph_t::iterator iter = graph_.find(current);
+	graph::graph_t::const_iterator iter = graph_.find(current);
 	// This node has no siblings at all
 	if (iter == graph_.end())
 		return successors;

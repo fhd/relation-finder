@@ -8,9 +8,9 @@
 class tcp_connection : public boost::enable_shared_from_this<tcp_connection>
 {
 public:
-	/** Creates a new connection, setting the search algorithm's depth limit */
+	/** Creates a new connection */
 	static boost::shared_ptr<tcp_connection> create(
-			asio::io_service &io_service, unsigned int depth_limit);
+			asio::io_service &io_service);
 
 	asio::ip::tcp::socket &socket();
 
@@ -21,7 +21,7 @@ private:
 	asio::ip::tcp::socket socket_;
 	unsigned int depth_limit_;
 
-	tcp_connection(asio::io_service &io_service, unsigned int depth_limit);
+	tcp_connection(asio::io_service &io_service);
 	uint32_t read_uint();
 	void write_uint(uint32_t uint);
 };

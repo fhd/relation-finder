@@ -1,6 +1,7 @@
 #ifndef UTIL_HPP
 #define UTIL_HPP
 
+#include <string>
 #include <sstream>
 
 /** A class containing utility methods */

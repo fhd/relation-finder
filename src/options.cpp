@@ -3,7 +3,6 @@
 #include <vector>
 #include <boost/program_options.hpp>
 #include <boost/foreach.hpp>
-
 #include "options.hpp"
 
 #define VERSION "0.1"
@@ -128,55 +127,55 @@ from the database"
 	verbose_ = vm.count("verbose");
 }
 
-unsigned int options::port()
+unsigned int options::port() const
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return port_;
 }
 
-unsigned int options::fetching_interval()
+unsigned int options::fetching_interval() const
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return fetching_interval_;
 }
 
-unsigned int options::depth_limit()
+unsigned int options::depth_limit() const
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return depth_limit_;
 }
 
-bool options::verbose()
+bool options::verbose() const
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return verbose_;
 }
 
-std::string options::db_name()
+std::string options::db_name() const
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return db_name_;
 }
 
-std::string options::db_user()
+std::string options::db_user() const
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return db_user_;
 }
 
-std::string options::db_password()
+std::string options::db_password() const
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return db_password_;
 }
 
-std::string options::db_host()
+std::string options::db_host() const
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return db_host_;
 }
 
-unsigned int options::db_port()
+unsigned int options::db_port() const
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return db_port_;
@@ -186,7 +185,8 @@ options::options()
 {
 }
 
-boost::shared_ptr<fs::path> options::find_config_file(char *binary_path)
+boost::shared_ptr<fs::path> options::find_config_file(const char *binary_path)
+		const
 {
 	// Find the path to the binary's directory
 	fs::path bin_path(binary_path);

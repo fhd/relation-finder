@@ -8,15 +8,12 @@ class tcp_server
 {
 	public:
 		/**
-		 * Constructor creating a new multiclient server using the supplied
-		 * depth limit when invoking the search algorithm.
+		 * Constructor creating a new multiclient server.
 		 */
-		tcp_server(asio::io_service &io_service, unsigned int port,
-				unsigned int depth_limit);
+		tcp_server(asio::io_service &io_service, unsigned int port);
 
 	private:
 		asio::ip::tcp::acceptor acceptor_;
-		unsigned int depth_limit_;
 
 		void start_accept();
 		void handle_accept(boost::shared_ptr<tcp_connection> new_connection,
