@@ -11,20 +11,20 @@ class options
 {
 public:
 	/** Singleton instance getter */
-	static boost::shared_ptr<options> get_instance();
+	static boost::shared_ptr<options> instance();
 
 	/** Parses options from the command line and the configuration file */
 	void parse(int argc, char **argv);
 
-	unsigned int get_port();
-	unsigned int get_fetching_interval();
-	unsigned int get_depth_limit();
-	bool get_verbose();
-	std::string get_db_name();
-	std::string get_db_user();
-	std::string get_db_password();
-	std::string get_db_host();
-	unsigned int get_db_port();
+	unsigned int port();
+	unsigned int fetching_interval();
+	unsigned int depth_limit();
+	bool verbose();
+	std::string db_name();
+	std::string db_user();
+	std::string db_password();
+	std::string db_host();
+	unsigned int db_port();
 
 private:
 	static boost::shared_ptr<options> instance_;

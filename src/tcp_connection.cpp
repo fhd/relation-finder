@@ -8,7 +8,7 @@ boost::shared_ptr<tcp_connection> tcp_connection::create(
 			new tcp_connection(io_service, depth_limit));
 }
 
-asio::ip::tcp::socket &tcp_connection::get_socket()
+asio::ip::tcp::socket &tcp_connection::socket()
 {
 	return socket_;
 }
@@ -22,7 +22,7 @@ void tcp_connection::start()
 	uint32_t apid = read_uint();
 
 	// Get the current relations and calculate the path
-	graph::graph_t relations = fetcher::get_instance()->get_relations();
+	graph::graph_t relations = fetcher::instance()->relations();
 	searcher searcher(relations);
 	boost::shared_ptr<graph::path_t> path = searcher.find_shortest_path(
 			pid, apid, depth_limit_);

@@ -32,7 +32,7 @@ namespace po = boost::program_options;
 boost::shared_ptr<options> options::instance_ = boost::shared_ptr<options>();
 boost::mutex options::instance_mutex_;
 
-boost::shared_ptr<options> options::get_instance()
+boost::shared_ptr<options> options::instance()
 {
 	boost::mutex::scoped_lock lock(instance_mutex_);
 	if (!instance_)
@@ -128,55 +128,55 @@ from the database"
 	verbose_ = vm.count("verbose");
 }
 
-unsigned int options::get_port()
+unsigned int options::port()
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return port_;
 }
 
-unsigned int options::get_fetching_interval()
+unsigned int options::fetching_interval()
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return fetching_interval_;
 }
 
-unsigned int options::get_depth_limit()
+unsigned int options::depth_limit()
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return depth_limit_;
 }
 
-bool options::get_verbose()
+bool options::verbose()
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return verbose_;
 }
 
-std::string options::get_db_name()
+std::string options::db_name()
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return db_name_;
 }
 
-std::string options::get_db_user()
+std::string options::db_user()
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return db_user_;
 }
 
-std::string options::get_db_password()
+std::string options::db_password()
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return db_password_;
 }
 
-std::string options::get_db_host()
+std::string options::db_host()
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return db_host_;
 }
 
-unsigned int options::get_db_port()
+unsigned int options::db_port()
 {
 	boost::mutex::scoped_lock lock(options_mutex_);
 	return db_port_;

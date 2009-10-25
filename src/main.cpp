@@ -17,7 +17,7 @@ struct fetcher_thread
 
 	void operator()()
 	{
-		boost::shared_ptr<fetcher> f = fetcher::get_instance();
+		boost::shared_ptr<fetcher> f = fetcher::instance();
 		f->set_verbose(verbose_);
 		for (;;) {
 			// Fetch new relations
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 {
 	try {
 		// Parse the commandline options
-		boost::shared_ptr<options> o = options::get_instance();
+		boost::shared_ptr<options> o = options::instance();
 		try {
 			o->parse(argc, argv);
 		} catch (int e) {
@@ -47,12 +47,12 @@ int main(int argc, char **argv)
 		}
 
 		// Start the fetcher thread
-		fetcher_thread fetcher(o->get_fetching_interval(), o->get_verbose());
+		fetcher_thread fetcher(o->fetching_interval(), o->verbose());
 		boost::thread thread(fetcher);
 
 		// Start the server and listen for incoming connections
 		asio::io_service io_service;
-		tcp_server server(io_service, o->get_port(), o->get_depth_limit());
+		tcp_server server(io_service, o->port(), o->depth_limit());
 		io_service.run();
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;

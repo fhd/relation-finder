@@ -8,7 +8,7 @@
 boost::shared_ptr<fetcher> fetcher::instance_ = boost::shared_ptr<fetcher>();
 boost::mutex fetcher::instance_mutex_;
 
-boost::shared_ptr<fetcher> fetcher::get_instance()
+boost::shared_ptr<fetcher> fetcher::instance()
 {
 	boost::mutex::scoped_lock lock(instance_mutex_);
 	if (!instance_)
@@ -22,7 +22,7 @@ void fetcher::set_verbose(bool verbose)
 	verbose_ = verbose;
 }
 
-graph::graph_t fetcher::get_relations()
+graph::graph_t fetcher::relations()
 {
 	boost::mutex::scoped_lock lock(relations_mutex_);
 	return relations_;
@@ -39,15 +39,15 @@ void fetcher::fetch()
 	relations_.clear();
 
 	// Connect to the database
-	boost::shared_ptr<options> opts = options::get_instance();
+	boost::shared_ptr<options> opts = options::instance();
 	connect_string_builder csb;
-	csb.set_option("dbname", opts->get_db_name());
-	csb.set_option("user", opts->get_db_user());
-	csb.set_option("password", opts->get_db_password());
-	csb.set_option("host", opts->get_db_host());
+	csb.set_option("dbname", opts->db_name());
+	csb.set_option("user", opts->db_user());
+	csb.set_option("password", opts->db_password());
+	csb.set_option("host", opts->db_host());
 	csb.set_option("port", util::convert_to_string<unsigned int>(
-				opts->get_db_port()));
-	SOCI::Session sql(SOCI::postgresql, csb.get_string());
+				opts->db_port()));
+	SOCI::Session sql(SOCI::postgresql, csb.string());
 
 	// Fetch all people
 	int person_no;
@@ -86,7 +86,7 @@ void fetcher::connect_string_builder::set_option(const std::string &name,
 		stream_ << name << "=" << value << " ";
 }
 
-std::string fetcher::connect_string_builder::get_string()
+std::string fetcher::connect_string_builder::string()
 {
 	return stream_.str();
 }

@@ -12,13 +12,13 @@ class fetcher
 {
 public:
 	/** Singleton instance getter */
-	static boost::shared_ptr<fetcher> get_instance();
+	static boost::shared_ptr<fetcher> instance();
 
 	/** If true, the fetcher will talk about its actions */
 	void set_verbose(bool verbose);
 
 	/** Returns the last read relations */
-	graph::graph_t get_relations();
+	graph::graph_t relations();
 
 	/** Fetches new relations from the database regularly */
 	void fetch();
@@ -37,7 +37,7 @@ private:
 	{
 	public:
 		void set_option(const std::string &name, const std::string &value);
-		std::string get_string();
+		std::string string();
 
 	private:
 		std::stringstream stream_;

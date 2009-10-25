@@ -12,7 +12,7 @@ public:
 	static boost::shared_ptr<tcp_connection> create(
 			asio::io_service &io_service, unsigned int depth_limit);
 
-	asio::ip::tcp::socket &get_socket();
+	asio::ip::tcp::socket &socket();
 
 	/** Commences the communication */
 	void start();
