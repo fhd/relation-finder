@@ -1,4 +1,0 @@
-Release goals for 0.1:
-======================
-- Review the whole code, refactor
-- Thoroughly scan for memory leaks and fix them.
