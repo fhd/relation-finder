@@ -7,9 +7,7 @@
 class tcp_server
 {
 	public:
-		/**
-		 * Constructor creating a new multiclient server.
-		 */
+		/** Constructor creating a new multiclient server. */
 		tcp_server(asio::io_service &io_service, unsigned int port);
 
 	private:

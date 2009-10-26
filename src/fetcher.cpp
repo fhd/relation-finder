@@ -79,7 +79,7 @@ void fetcher::connect_string_builder::set_option(const std::string &name,
 		stream_ << name << "=" << value << " ";
 }
 
-std::string fetcher::connect_string_builder::string()
+std::string fetcher::connect_string_builder::string() const
 {
 	return stream_.str();
 }

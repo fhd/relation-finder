@@ -33,7 +33,7 @@ private:
 	{
 	public:
 		void set_option(const std::string &name, const std::string &value);
-		std::string string();
+		std::string string() const;
 
 	private:
 		std::stringstream stream_;
