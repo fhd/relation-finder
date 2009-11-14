@@ -18,6 +18,7 @@ install dist-etc
 exe wbd
 	: main.cpp
 	  options.cpp
+	  util.cpp	  
 	  fetcher.cpp
 	  tcp_server.cpp
 	  tcp_connection.cpp

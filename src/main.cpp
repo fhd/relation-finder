@@ -3,6 +3,7 @@
 #include <boost/thread/xtime.hpp>
 #include <asio.hpp>
 #include "options.hpp"
+#include "util.hpp"
 #include "fetcher.hpp"
 #include "tcp_server.hpp"
 
@@ -43,6 +44,8 @@ int main(int argc, char **argv)
 			return e;
 		}
 
+		util::message("Initialised.");
+
 		// Start the fetcher thread
 		fetcher_thread fetcher(opts->fetching_interval());
 		boost::thread thread(fetcher);
@@ -52,7 +55,7 @@ int main(int argc, char **argv)
 		tcp_server server(io_service, opts->port());
 		io_service.run();
 	} catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Caught an exception: " << e.what() << std::endl;
 	}
 
 	return 0;

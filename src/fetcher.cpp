@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include <pqxx/pqxx>
 #include <boost/lexical_cast.hpp>
@@ -27,8 +26,7 @@ void fetcher::fetch()
 {
 	boost::mutex::scoped_lock lock(relations_mutex_);
 
-	if (options::instance()->verbose())
-		std::cout << "Fetching new relations from the database ...";
+	util::message("Fetching new relations from the database ...");
 
 	relations_.clear();
 
@@ -64,8 +62,7 @@ void fetcher::fetch()
 		}
 	}
 
-	if (options::instance()->verbose())
-		std::cout << " finished." << std::endl;
+	util::message("Fetched " + boost::lexical_cast<std::string>(presult.size()) + " relations.");
 }
 
 fetcher::fetcher()

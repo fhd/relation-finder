@@ -1,4 +1,5 @@
 #include <boost/bind.hpp>
+#include "util.hpp"
 #include "tcp_server.hpp"
 
 using asio::ip::tcp;
@@ -6,6 +7,7 @@ using asio::ip::tcp;
 tcp_server::tcp_server(asio::io_service &io_service, unsigned int port) :
 		acceptor_(io_service, tcp::endpoint(tcp::v4(), port))
 {
+	util::message("Accepting connections.");
 	start_accept();
 }
 
@@ -23,6 +25,8 @@ void tcp_server::handle_accept(
 		boost::shared_ptr<tcp_connection> new_connection,
 		const asio::error_code &error)
 {
+	util::message("New connection.");
+
 	if (!error) {
 		new_connection->start();
 		start_accept();
