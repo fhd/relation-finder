@@ -42,19 +42,18 @@ void write_uint(tcp::socket &socket, uint32_t uint)
 
 int main(int argc, char *argv[])
 {
-	// Read request parameters from stdin
-	std::string host, port;
-	unsigned int pid, apid;
-	std::cout << "This tool will ask wbd for a connection between two people."
-			<< std::endl;
-	std::cout << "wbd's host: ";
-	std::cin >> host;
-	std::cout << "wbd's port: ";
-	std::cin >> port;
-	std::cout << "A person's ID: ";
-	std::cin >> pid;
-	std::cout << "Another person's ID: ";
-	std::cin >> apid;
+	// Read address and request parameters from the commandline
+	if (argc < 4) {
+		std::cerr << "wbdc - asks wbd for a connection between two people"
+				<< std::endl << "Usage: wbdc HOST PORT PERSON1 PERSON2"
+				<< std::endl;
+		return 1;
+	}
+
+	std::string host = argv[1];
+	std::string port = argv[2];
+	unsigned int pid1 = atoi(argv[3]);
+	unsigned int pid2 = atoi(argv[4]);
 
 	try {
 		// Resolve the host
@@ -75,10 +74,10 @@ int main(int argc, char *argv[])
 			throw asio::system_error(error);
 
 		// Write the person's id
-		write_uint(socket, pid);
+		write_uint(socket, pid1);
 
 		// Write the other person's id
-		write_uint(socket, apid);
+		write_uint(socket, pid2);
 
 		// Read the length of the path
 		int path_length = read_uint(socket);

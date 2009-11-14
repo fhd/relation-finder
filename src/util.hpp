@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <boost/thread/mutex.hpp>
+#include <boost/filesystem.hpp>
 
 /** A class containing utility methods */
 class util
@@ -20,6 +21,9 @@ public:
 
 	/** Presents a message to the user */
 	static void message(const std::string &message);
+
+	/** Returns the directory of this program's binary */
+	static boost::filesystem::path bin_dir();
 
 private:
 	static boost::mutex message_mutex_;

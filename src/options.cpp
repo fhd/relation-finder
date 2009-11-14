@@ -4,6 +4,7 @@
 #include <boost/program_options.hpp>
 #include <boost/foreach.hpp>
 #include "options.hpp"
+#include "util.hpp"
 
 #define VERSION "0.2"
 #define DESCRIPTION_TEXT \
@@ -188,14 +189,10 @@ options::options()
 boost::shared_ptr<fs::path> options::find_config_file(
 		const char *binary_path) const
 {
-	// Find the path to the binary's directory
-	fs::path bin_path(binary_path);
-	std::string bin_dir = bin_path.branch_path().string();
-
 	// The following candidates will be searched in that order
 	std::vector<fs::path> candidates;
-	candidates.push_back(fs::path(bin_dir + "/../etc/"CONFIG_FILE));
-	candidates.push_back(fs::path("/etc/"CONFIG_FILE));
+	candidates.push_back(util::bin_dir() / "/../etc/"CONFIG_FILE);
+	candidates.push_back("/etc/"CONFIG_FILE);
 
 	// Check each of the candidates and return the first one that is found
 	BOOST_FOREACH(fs::path candidate, candidates)
