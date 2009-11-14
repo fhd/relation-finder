@@ -1,3 +1,3 @@
 Ideas for the next release:
 ===========================
-- Abstract the data access, i.e. support more data bases and data sources
+- Abstract the data access, i.e. support more databases and data sources.
