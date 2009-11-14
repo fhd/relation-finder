@@ -45,7 +45,7 @@ On a Debian system, the required packages are:
 - libpqxx-dev
 
 Once you've made sure that everything is in place, type:
-bjam
+bjam release
 
 After the build process is finished, the desired binary (wbd) resides
 in dist/bin.
@@ -80,10 +80,10 @@ On a Debian system, the packages are:
 INSTALLING
 ==========
 To install everything, just invoke the following command:
-bjam -s DIST_DIR=/usr/local
+bjam release -s DIST_DIR=/usr/local
 
 To install just wbd (recommended), execute:
-bjam wbd -s DIST_DIR=/usr/local
+bjam release wbd -s DIST_DIR=/usr/local
 
 If you would like to remove it for some unreal reason, invoke:
 bjam clean -s DIST_DIR=/usr/local
