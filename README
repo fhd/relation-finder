@@ -40,6 +40,10 @@ The PostgreSQL C++ library (pqxx) (at least version 2.6)
 
 On a Debian system, the required packages are:
 - libboost-dev
+- libboost-filesystem-dev
+- libboost-program-options-dev
+- libboost-thread-dev
+- libboost-test-dev
 - libasio-dev
 - boost-build
 - libpqxx-dev
