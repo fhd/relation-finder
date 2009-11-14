@@ -25,8 +25,7 @@ exe wbd
 	  boost_filesystem
 	  boost_program_options
 	  boost_thread
-	  soci_core-gcc-2_2
-	  soci_postgresql-gcc-2_2
+	  pqxx
 	;
 
 lib searcher
@@ -37,5 +36,4 @@ lib searcher
 lib boost_filesystem ;
 lib boost_program_options ;
 lib boost_thread ;
-lib soci_core-gcc-2_2 ;
-lib soci_postgresql-gcc-2_2 ;
+lib pqxx ;

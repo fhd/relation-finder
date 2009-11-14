@@ -1,6 +1,7 @@
 #include <iostream>
-#include <soci/soci.h>
-#include <soci/postgresql/soci-postgresql.h>
+#include <string>
+#include <pqxx/pqxx>
+#include <boost/lexical_cast.hpp>
 #include "options.hpp"
 #include "util.hpp"
 #include "fetcher.hpp"
@@ -39,29 +40,28 @@ void fetcher::fetch()
 	csb.set_option("password", opts->db_password());
 	csb.set_option("host", opts->db_host());
 	csb.set_option("port", util::convert_to_string<unsigned int>(
-				opts->db_port()));
-	SOCI::Session sql(SOCI::postgresql, csb.string());
+			opts->db_port()));
+	pqxx::connection conn(csb.string());
+	pqxx::work work(conn);
 
 	// Fetch all people
-	int person_no;
-	SOCI::Statement pst = (sql.prepare
-			<< "select distinct owner_nr from buddys",
-			SOCI::into(person_no));
-	pst.execute();
-
-	// Read and store their friends
-	while (pst.fetch()) {
+	pqxx::result rpeople = work.exec("select distinct owner_nr from buddys");
+	for (pqxx::result::size_type i = 0; i < rpeople.size(); i++) {
+		graph::node_t person_no;
+		rpeople[i]["owner_nr"].to(person_no);
 		relations_[person_no] = graph::nodes_t();
 		graph::nodes_t &friends = relations_[person_no];
 
-		int friend_no;
-		SOCI::Statement fst = (sql.prepare
-				<< "select buddy_nr from buddys where owner_nr = :person_no",
-				SOCI::use(person_no), SOCI::into(friend_no));
-		fst.execute();
+		// Read and store their friends
+		pqxx::result rfriends = work.exec(
+				"select buddy_nr from buddys where owner_nr = "
+				+ boost::lexical_cast<std::string>(person_no));
 
-		while (fst.fetch())
+		for (pqxx::result::size_type j = 0; j < rfriends.size(); j++) {
+			graph::node_t friend_no;
+			rfriends[j]["buddy_nr"].to(friend_no);
 			friends.push_back(friend_no);
+		}
 	}
 
 	if (verbose_)

@@ -34,21 +34,15 @@ In particular, the following libraries:
 - Boost.Program_options
 - Boost.Thread
 - Boost.Test
-
 You will also need Boost.Build (AKA bjam).
 
-SOCI 2.2.x, in particular:
-- The core library
-- The PostgreSQL backend
-- The PostgreSQL C++ library (libpq)
+The PostgreSQL C++ library (pqxx) (at least version 2.6)
 
 On a Debian system, the required packages are:
 - libboost-dev
 - libasio-dev
 - boost-build
-- libsoci-core-gcc-dev
-- libsoci-postgresql-gcc
-- libpq-dev
+- libpqxx-dev
 
 Once you've made sure that everything is in place, type:
 bjam
@@ -59,8 +53,8 @@ in dist/bin.
 
 RUNNING
 =======
-You'll need a properly set up PostgreSQL database; to get one with some test
-data, execute doc/setup_db.sql.
+You'll need a properly set up PostgreSQL database; to get one with
+some test data, execute doc/setup_db.sql.
 
 After compiling wbd, you've automatically built a couple of programs:
 - wbd	-- the daemon itself
@@ -80,9 +74,7 @@ On a Debian system, the packages are:
 - libboost-thread
 - libboost-program-options
 - libboost-filesystem
-- libsoci-core-gcc
-- libsoci-postgresql-gcc
-- libpq
+- libpqxx
 
 
 INSTALLING
