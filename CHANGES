@@ -1,6 +1,7 @@
 0.2 (2009-11-14)
 ================
 * Moved from SOCI to direct PostgreSQL access
+* Increased verbosity
 
 0.1 (2009-10-26)
 ================
