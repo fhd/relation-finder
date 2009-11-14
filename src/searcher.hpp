@@ -35,8 +35,7 @@ private:
 
 	/**
 	 * Finds all the successors of the current node.
-	 * Th all siblings we didn't process yet and
-	 * updates the memoisation table
+	 * Ignores those already on the memoisation table and updates the table.
 	 */
 	graph::nodes_t find_successors(const graph::node_t &node,
 			graph::nodes_t &memtable) const;

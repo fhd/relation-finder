@@ -25,7 +25,6 @@ private:
 	static boost::mutex instance_mutex_;
 	graph::graph_t relations_;
 	mutable boost::mutex relations_mutex_;
-	bool verbose_;
 	
 	fetcher();
 

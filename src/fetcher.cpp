@@ -27,7 +27,7 @@ void fetcher::fetch()
 {
 	boost::mutex::scoped_lock lock(relations_mutex_);
 
-	if (verbose_)
+	if (options::instance()->verbose())
 		std::cout << "Fetching new relations from the database ...";
 
 	relations_.clear();
@@ -41,34 +41,34 @@ void fetcher::fetch()
 	csb.set_option("host", opts->db_host());
 	csb.set_option("port", util::convert_to_string<unsigned int>(
 			opts->db_port()));
-	pqxx::connection conn(csb.string());
-	pqxx::work work(conn);
+	pqxx::connection connection(csb.string());
+	pqxx::work work(connection);
 
 	// Fetch all people
-	pqxx::result rpeople = work.exec("select distinct owner_nr from buddys");
-	for (pqxx::result::size_type i = 0; i < rpeople.size(); i++) {
+	pqxx::result presult = work.exec("select distinct owner_nr from buddys");
+	for (pqxx::result::size_type i = 0; i < presult.size(); i++) {
 		graph::node_t person_no;
-		rpeople[i]["owner_nr"].to(person_no);
-		relations_[person_no] = graph::nodes_t();
-		graph::nodes_t &friends = relations_[person_no];
+		presult[i]["owner_nr"].to(person_no);
 
 		// Read and store their friends
-		pqxx::result rfriends = work.exec(
+		graph::nodes_t &friends = relations_[person_no];
+		friends = graph::nodes_t();
+
+		pqxx::result fresult = work.exec(
 				"select buddy_nr from buddys where owner_nr = "
 				+ boost::lexical_cast<std::string>(person_no));
-
-		for (pqxx::result::size_type j = 0; j < rfriends.size(); j++) {
+		for (pqxx::result::size_type j = 0; j < fresult.size(); j++) {
 			graph::node_t friend_no;
-			rfriends[j]["buddy_nr"].to(friend_no);
+			fresult[j]["buddy_nr"].to(friend_no);
 			friends.push_back(friend_no);
 		}
 	}
 
-	if (verbose_)
+	if (options::instance()->verbose())
 		std::cout << " finished." << std::endl;
 }
 
-fetcher::fetcher() : verbose_(options::instance()->verbose())
+fetcher::fetcher()
 {
 }
 

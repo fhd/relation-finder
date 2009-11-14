@@ -5,7 +5,7 @@
 #include <boost/foreach.hpp>
 #include "options.hpp"
 
-#define VERSION "0.1"
+#define VERSION "0.2"
 #define DESCRIPTION_TEXT \
 		"A daemon calculating the shortest path between two people " \
 		"in a social network."
@@ -185,8 +185,8 @@ options::options()
 {
 }
 
-boost::shared_ptr<fs::path> options::find_config_file(const char *binary_path)
-		const
+boost::shared_ptr<fs::path> options::find_config_file(
+		const char *binary_path) const
 {
 	// Find the path to the binary's directory
 	fs::path bin_path(binary_path);
