@@ -1,6 +1,3 @@
-0.3
-================
-
 0.2 (2009-11-14)
 ================
 * Moved from SOCI to direct PostgreSQL access
