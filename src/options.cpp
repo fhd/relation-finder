@@ -7,13 +7,13 @@
 #include "util.hpp"
 
 #define VERSION "0.2"
-#define DESCRIPTION_TEXT												\
-		"A daemon calculating the shortest path between two people "	\
+#define DESCRIPTION_TEXT \
+		"A daemon calculating the shortest path between two people " \
 		"in a social network."
 #define USAGE_TEXT "Usage: wbd [OPTION]..."
-#define VERSION_TEXT									\
-		"wbd (Wanjas Beziehungs Daemon) "VERSION"\n"	\
-		"Copyright (C) 2009 Felix H. Dahlke.\n"			\
+#define VERSION_TEXT \
+		"wbd (Wanjas Beziehungs Daemon) "VERSION"\n" \
+		"Copyright (C) 2009 Felix H. Dahlke.\n" \
 		"Licensed under the MIT License."
 
 #define CONFIG_FILE "wbd.cfg"
