@@ -7,13 +7,13 @@
 #include "util.hpp"
 
 #define VERSION "0.2"
-#define DESCRIPTION_TEXT \
-		"A daemon calculating the shortest path between two people " \
+#define DESCRIPTION_TEXT												\
+		"A daemon calculating the shortest path between two people "	\
 		"in a social network."
 #define USAGE_TEXT "Usage: wbd [OPTION]..."
-#define VERSION_TEXT \
-		"wbd (Wanjas Beziehungs Daemon) "VERSION"\n"\
-		"Copyright (C) 2009 Felix H. Dahlke.\n"\
+#define VERSION_TEXT									\
+		"wbd (Wanjas Beziehungs Daemon) "VERSION"\n"	\
+		"Copyright (C) 2009 Felix H. Dahlke.\n"			\
 		"Licensed under the MIT License."
 
 #define CONFIG_FILE "wbd.cfg"
@@ -46,58 +46,30 @@ void options::parse(int argc, char **argv)
 
 	po::options_description desc("Options");
 	desc.add_options()
-		(
-			"port",
-			po::value<unsigned int>(&port_)->default_value(DEFAULT_PORT),
-			"set the tcp port to listen on"
-		)
-		(
-			"fetching-interval",
-			po::value<unsigned int>(&fetching_interval_)->default_value(
-					DEFAULT_FETCHING_INTERVAL),
-			"set the time (in seconds) to wait before fetching new relations \
-from the database"
-		)
-		(
-			"depth-limit",
-			po::value<unsigned int>(&depth_limit_)->default_value(
-					DEFAULT_DEPTH_LIMIT),
-			"set the maximum length of relationship paths"
-		)
-		(
-		 	"db-name",
-			po::value<std::string>(&db_name_)->default_value(
-					DEFAULT_DB_NAME),
-			"set the database name"
-		)
-		(
-		 	"db-user",
-			po::value<std::string>(&db_user_)->default_value(
-					DEFAULT_DB_USER),
-			"set the database user"
-		)
-		(
-		 	"db-password",
-			po::value<std::string>(&db_password_)->default_value(
-					DEFAULT_DB_PASSWORD),
-			"set the database user's password"
-		)
-		(
-		 	"db-host",
-			po::value<std::string>(&db_host_)->default_value(
-					DEFAULT_DB_HOST),
-			"set the database host"
-		)
-		(
-		 	"db-port",
-			po::value<unsigned int>(&db_port_)->default_value(
-					DEFAULT_DB_PORT),
-			"set the database port"
-		)
-		("verbose", "explain what is happening")
-		("help", "display this help and exit")
-		("version",	"output version information and exit")
-	;
+			("port", po::value<unsigned int>(&port_)
+					->default_value(DEFAULT_PORT),
+					"set the tcp port to listen on")
+			("fetching-interval", po::value<unsigned int>(&fetching_interval_)
+					->default_value(DEFAULT_FETCHING_INTERVAL),
+					"set the time (in seconds) to wait before fetching new \
+relations from the database")
+			("depth-limit", po::value<unsigned int>(&depth_limit_)
+					->default_value(DEFAULT_DEPTH_LIMIT),
+					"set the maximum length of relationship paths")
+			("db-name", po::value<std::string>(&db_name_)
+					->default_value(DEFAULT_DB_NAME), "set the database name")
+			("db-user", po::value<std::string>(&db_user_)
+					->default_value(DEFAULT_DB_USER), "set the database user")
+			("db-password", po::value<std::string>(&db_password_)
+					->default_value(DEFAULT_DB_PASSWORD),
+					"set the database user's password")
+			("db-host", po::value<std::string>(&db_host_)
+					->default_value(DEFAULT_DB_HOST), "set the database host")
+			("db-port",	po::value<unsigned int>(&db_port_)
+					->default_value(DEFAULT_DB_PORT), "set the database port")
+			("verbose", "explain what is happening")
+			("help", "display this help and exit")
+			("version",	"output version information and exit");
 
 	po::variables_map vm;
 

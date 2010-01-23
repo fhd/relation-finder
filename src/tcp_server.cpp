@@ -16,9 +16,9 @@ void tcp_server::start_accept()
 	boost::shared_ptr<tcp_connection> new_connection = tcp_connection::create(
 			acceptor_.io_service());
 
-	acceptor_.async_accept(new_connection->socket(), boost::bind(
-				&tcp_server::handle_accept, this, new_connection,
-				asio::placeholders::error));
+	acceptor_.async_accept(new_connection->socket(),
+			boost::bind(&tcp_server::handle_accept, this, new_connection,
+					asio::placeholders::error));
 }
 
 void tcp_server::handle_accept(

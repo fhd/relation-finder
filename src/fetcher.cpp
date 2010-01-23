@@ -37,8 +37,8 @@ void fetcher::fetch()
 	csb.set_option("user", opts->db_user());
 	csb.set_option("password", opts->db_password());
 	csb.set_option("host", opts->db_host());
-	csb.set_option("port", util::convert_to_string<unsigned int>(
-			opts->db_port()));
+	csb.set_option("port",
+			util::convert_to_string<unsigned int>(opts->db_port()));
 	pqxx::connection connection(csb.string());
 	pqxx::work work(connection);
 
