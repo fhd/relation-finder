@@ -5,7 +5,7 @@
 #include <boost/foreach.hpp>
 #include "options.hpp"
 
-#define VERSION "0.1"
+#define VERSION "1.0.0"
 #define DESCRIPTION_TEXT \
 		"A daemon calculating the shortest path between two people " \
 		"in a social network."
