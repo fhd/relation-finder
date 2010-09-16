@@ -6,7 +6,7 @@
 #include "options.hpp"
 #include "util.hpp"
 
-#define VERSION "0.2"
+#define VERSION "1.2.0"
 #define DESCRIPTION_TEXT \
 		"A daemon calculating the shortest path between two people " \
 		"in a social network."
