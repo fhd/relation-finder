@@ -1,9 +1,9 @@
-0.2 (2009-11-14)
-================
+1.1.0 (2009-11-14)
+==================
 * Moved from SOCI to direct PostgreSQL access
 * Increased verbosity
 * Improved configuration file discovery code
 
-0.1 (2009-10-26)
-================
+1.0.0 (2009-10-26)
+==================
 * Initial release
