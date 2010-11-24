@@ -1,3 +1,7 @@
-Ideas for the next release:
-===========================
-- Abstract the data access, i.e. support more databases and data sources.
+- Move to CMake
+- Apply modern coding standards
+- Make data access and search more generic
+- Make the database specifics configurable
+- Write more test cases
+- Find a new name and move to GitHub
+
