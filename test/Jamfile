@@ -1,10 +1,10 @@
 import testing ;
 
-use-project /wbd_lib : ../src ;
+use-project /relation_finder_lib : ../src ;
 
 unit-test searcher_test
 	: searcher_test.cpp
-	  /wbd_lib//searcher
+	  /relation_finder_lib//searcher
 	  boost_unit_test_framework
 	;
 

@@ -6,16 +6,16 @@ alias dist
 	;
 
 install dist-bin
-	: wbd
+	: relation-finder
 	: <location>$(DIST_DIR)/bin
 	;
 
 install dist-etc
-	: ../doc/wbd.cfg
+	: ../doc/relation-finder.cfg
 	: <location>$(DIST_DIR)/etc
 	;
 
-exe wbd
+exe relation-finder
 	: main.cpp
 	  options.cpp
 	  util.cpp	  

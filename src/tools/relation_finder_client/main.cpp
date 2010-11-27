@@ -1,10 +1,10 @@
 /*
- * This is an example client for wbd, demonstrating its protocol
- * using Boost.Asio for network communication.
+ * This is an example client for relation-finder-client, demonstrating its
+ * protocol using Boost.Asio for network communication.
  *
  * The protocol is pretty simple, the only data send is a couple of
  * 32 bit unsigned integers. It basically works like this:
- * 1. Connect to wbd via TCP.
+ * 1. Connect to relation-finder via TCP.
  * 2. Send the user ID of the first person (user A).
  * 3. Send the user ID of the second person (user B).
  * 4. Read the length of path.
@@ -44,8 +44,9 @@ int main(int argc, char *argv[])
 {
 	// Read address and request parameters from the commandline
 	if (argc < 4) {
-		std::cerr << "wbdc - asks wbd for a connection between two people"
-				<< std::endl << "Usage: wbdc HOST PORT PERSON1 PERSON2"
+		std::cerr << "relation-finder-client - asks rfd for a connection "
+				<< "between two people" << std::endl
+				<< "Usage: relation-finder-client HOST PERSON1 PERSON2"
 				<< std::endl;
 		return 1;
 	}

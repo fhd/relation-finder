@@ -9,15 +9,15 @@ else
 	path-constant DIST_DIR : $(TOP)/dist ;
 }
 
-project wbd
+project relation-finder
 	: requirements <threading>multi
 	: build-dir bin
 	;
 
-alias all : wbd wbdc test ;
+alias all : relation-finder relation-finder-client test ;
 
-alias wbd : src ;
-explicit wbd ;
+alias relation-finder : src ;
+explicit relation-finder ;
 
-alias wbdc : src/tools/wbdc ;
-explicit wbdc ;
+alias relation-finder-client : src/tools/relation_finder_client ;
+explicit relation-finder-client ;

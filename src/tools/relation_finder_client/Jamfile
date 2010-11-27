@@ -1,8 +1,8 @@
 install dist
-	: wbdc
+	: relation-finder-client
 	: <location>$(DIST_DIR)/bin
 	;
 
-exe wbdc
+exe relation-finder-client
 	: main.cpp 
 	;

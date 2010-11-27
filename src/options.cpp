@@ -8,15 +8,15 @@
 
 #define VERSION "2.2.0"
 #define DESCRIPTION_TEXT \
-		"A daemon calculating the shortest path between two people " \
+		"A daemon that finds the shortest path between two people " \
 		"in a social network."
-#define USAGE_TEXT "Usage: wbd [OPTION]..."
+#define USAGE_TEXT "Usage: relation-finder [OPTION]..."
 #define VERSION_TEXT \
-		"wbd (Wanjas Beziehungs Daemon) "VERSION"\n" \
+		"relation-finder "VERSION"\n" \
 		"Copyright (C) 2009 Felix H. Dahlke.\n" \
 		"Licensed under the MIT License."
 
-#define CONFIG_FILE "wbd.cfg"
+#define CONFIG_FILE "relation-finder.cfg"
 #define DEFAULT_PORT 8888
 #define DEFAULT_FETCHING_INTERVAL 300
 #define DEFAULT_DEPTH_LIMIT 5
