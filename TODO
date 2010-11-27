@@ -1,7 +1,0 @@
-- Move to CMake
-- Apply modern coding standards
-- Make data access and search more generic
-- Make the database specifics configurable
-- Write more test cases
-
-
