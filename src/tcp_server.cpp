@@ -4,31 +4,31 @@
 
 using asio::ip::tcp;
 
-tcp_server::tcp_server(asio::io_service &io_service, unsigned int port) :
-		acceptor_(io_service, tcp::endpoint(tcp::v4(), port))
+Tcp_server::Tcp_server(asio::io_service& io_service, unsigned int port)
+    : acceptor(io_service, tcp::endpoint(tcp::v4(), port))
 {
-	util::message("Accepting connections.");
-	start_accept();
+    Util::message("Accepting connections.");
+    start_accept();
 }
 
-void tcp_server::start_accept()
+void Tcp_server::start_accept()
 {
-	boost::shared_ptr<tcp_connection> new_connection = tcp_connection::create(
-			acceptor_.io_service());
+    boost::shared_ptr<Tcp_connection> new_connection =
+        Tcp_connection::create(acceptor.io_service());
 
-	acceptor_.async_accept(new_connection->socket(),
-			boost::bind(&tcp_server::handle_accept, this, new_connection,
-					asio::placeholders::error));
+    acceptor.async_accept(new_connection->get_socket(),
+                          boost::bind(&Tcp_server::handle_accept,
+                                      this, new_connection,
+                                      asio::placeholders::error));
 }
 
-void tcp_server::handle_accept(
-		boost::shared_ptr<tcp_connection> new_connection,
-		const asio::error_code &error)
+void Tcp_server::handle_accept(boost::shared_ptr<Tcp_connection> new_connection,
+                               const asio::error_code& error)
 {
-	util::message("New connection.");
+    Util::message("New connection.");
 
-	if (!error) {
-		new_connection->start();
-		start_accept();
-	}
+    if (!error) {
+        new_connection->start();
+        start_accept();
+    }
 }

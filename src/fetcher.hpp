@@ -7,36 +7,34 @@
 #include <boost/thread/mutex.hpp>
 #include "graph.hpp"
 
-/** Reads relations regularly from the database */
-class fetcher
-{
+/// Reads relations regularly from the database
+class Fetcher {
 public:
-	/** Singleton instance getter */
-	static boost::shared_ptr<fetcher> instance();
+    class Connect_string_builder {
+    public:
+        void set_option(const std::string& name, const std::string& value);
+        std::string string() const;
 
-	/** Returns the last read relations */
-	graph::graph_t relations() const;
+    private:
+        std::stringstream stream;
+    };
 
-	/** Fetches new relations from the database regularly */
-	void fetch();
+    /// Singleton instance getter
+    static boost::shared_ptr<Fetcher> get_instance();
+
+    /// Returns the last read relations
+    Graph::graph_t get_relations() const;
+
+    /// Fetches new relations from the database regularly
+    void fetch();
 
 private:
-	static boost::shared_ptr<fetcher> instance_;
-	static boost::mutex instance_mutex_;
-	graph::graph_t relations_;
-	mutable boost::mutex relations_mutex_;
-	
-	fetcher();
+    static boost::shared_ptr<Fetcher> instance;
+    static boost::mutex instance_mutex;
+    Graph::graph_t relations;
+    mutable boost::mutex relations_mutex;
 
-	class connect_string_builder
-	{
-	public:
-		void set_option(const std::string &name, const std::string &value);
-		std::string string() const;
-
-	private:
-		std::stringstream stream_;
-	};
+    Fetcher();
 };
 
-#endif /* FETCHER_HPP */
+#endif

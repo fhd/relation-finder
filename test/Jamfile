@@ -3,8 +3,8 @@ import testing ;
 use-project /relation_finder_lib : ../src ;
 
 unit-test searcher_test
-	: searcher_test.cpp
-	  /relation_finder_lib//searcher
+	  : searcher_test.cpp
+	    /relation_finder_lib//searcher
 	  boost_unit_test_framework
 	;
 
