@@ -14,10 +14,7 @@ project relation-finder
 	: build-dir bin
 	;
 
-alias all : relation-finder relation-finder-client test ;
+alias all : relation-finder tools test ;
 
 alias relation-finder : src ;
 explicit relation-finder ;
-
-alias relation-finder-client : src/tools/relation_finder_client ;
-explicit relation-finder-client ;

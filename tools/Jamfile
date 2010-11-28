@@ -4,5 +4,5 @@ install dist
 	;
 
 exe relation-finder-client
-	: main.cpp 
+	: relation_finder_client.cpp 
 	;
