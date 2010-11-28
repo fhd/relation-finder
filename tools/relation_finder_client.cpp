@@ -1,14 +1,13 @@
 /*
- * This is an example client for relation-finder-client, demonstrating its
- * protocol using Boost.Asio for network communication.
+ * This is an example client for relation-finder, demonstrating its protocol
+ * using Boost.Asio for network communication.
  *
- * The protocol is pretty simple, the only data send is a couple of
- * 32 bit unsigned integers. It basically works like this:
+ * The protocol is pretty simple, the only data send is a couple of unsigned
+ * 32-bit integers. It basically works like this:
  * 1. Connect to relation-finder via TCP.
  * 2. Send the user ID of the first person (user A).
  * 3. Send the user ID of the second person (user B).
- * 4. Read the length of path.
- *    If that number is 0, no path could be found.
+ * 4. Read the length of path. If that number is 0, no path could be found.
  * 5. Read as many user IDs as the path was long.
  *    This is the result, the path from user A to user B.
  */
