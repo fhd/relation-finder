@@ -9,11 +9,11 @@
 
 #include "../src/searcher.hpp"
 
-std::string path_to_string(Graph::path_t& path)
+std::string path_to_string(Graph::Path_type& path)
 {
     std::stringstream s;
     s << "[";
-    BOOST_FOREACH (Graph::node_t node, path) {
+    BOOST_FOREACH (Graph::Node_type node, path) {
         s << node;
         if (node != path.back())
             s << " -> ";
@@ -22,7 +22,7 @@ std::string path_to_string(Graph::path_t& path)
     return s.str();
 }
 
-void check_path(Graph::path_t& expected_path, Graph::path_t &path)
+void check_path(Graph::Path_type& expected_path, Graph::Path_type &path)
 {
     BOOST_REQUIRE_EQUAL(expected_path.size(), path.size());
 
@@ -48,7 +48,7 @@ struct Small_graph {
 
     ~Small_graph() {}
 
-    Graph::graph_t graph;
+    Graph::Graph_type graph;
 };
 
 struct Large_graph {
@@ -75,24 +75,25 @@ struct Large_graph {
 
     ~Large_graph() {}
 
-    Graph::graph_t graph;
+    Graph::Graph_type graph;
 };
 
 BOOST_FIXTURE_TEST_CASE(test_simple_path, Small_graph)
 {
     Searcher s(graph);
-    boost::shared_ptr<Graph::path_t> path = s.find_shortest_path(1, 7, 5);
+    boost::shared_ptr<Graph::Path_type> path = s.find_shortest_path(1, 7, 5);
     BOOST_REQUIRE_MESSAGE(path, "No path was found.");
 
     using namespace boost::assign;
-    Graph::path_t expected_path = list_of(1)(3)(6)(7);
+    Graph::Path_type expected_path = list_of(1)(3)(6)(7);
     check_path(expected_path, *path);
 }
 
 BOOST_FIXTURE_TEST_CASE(test_impossible_path, Small_graph)
 {
     Searcher s(graph);
-    boost::shared_ptr<Graph::path_t> path = s.find_shortest_path(1, 1000, 5);
+    boost::shared_ptr<Graph::Path_type> path =
+        s.find_shortest_path(1, 1000, 5);
     BOOST_REQUIRE_MESSAGE(!path,
                           "A path was found, although there can't be one.");
 }
@@ -100,40 +101,40 @@ BOOST_FIXTURE_TEST_CASE(test_impossible_path, Small_graph)
 BOOST_FIXTURE_TEST_CASE(test_complex1, Large_graph)
 {
     Searcher s(graph);
-    boost::shared_ptr<Graph::path_t> path = s.find_shortest_path(15, 16, 5);
+    boost::shared_ptr<Graph::Path_type> path = s.find_shortest_path(15, 16, 5);
 
     using namespace boost::assign;
-    Graph::path_t expected_path = list_of(15)(12)(8)(7)(16);
+    Graph::Path_type expected_path = list_of(15)(12)(8)(7)(16);
     check_path(expected_path, *path);
 }
 
 BOOST_FIXTURE_TEST_CASE(test_complex2, Large_graph)
 {
     Searcher s(graph);
-    boost::shared_ptr<Graph::path_t> path = s.find_shortest_path(1, 14, 5);
+    boost::shared_ptr<Graph::Path_type> path = s.find_shortest_path(1, 14, 5);
 
     using namespace boost::assign;
-    Graph::path_t expected_path = list_of(1)(9)(11)(14);
+    Graph::Path_type expected_path = list_of(1)(9)(11)(14);
     check_path(expected_path, *path);
 }
 
 BOOST_FIXTURE_TEST_CASE(test_complex3, Large_graph)
 {
     Searcher s(graph);
-    boost::shared_ptr<Graph::path_t> path = s.find_shortest_path(13, 5, 5);
+    boost::shared_ptr<Graph::Path_type> path = s.find_shortest_path(13, 5, 5);
 
     using namespace boost::assign;
-    Graph::path_t expected_path = list_of(13)(10)(2)(5);
+    Graph::Path_type expected_path = list_of(13)(10)(2)(5);
     check_path(expected_path, *path);
 }
 
 BOOST_FIXTURE_TEST_CASE(test_complex4, Large_graph)
 {
     Searcher s(graph);
-    boost::shared_ptr<Graph::path_t> path = s.find_shortest_path(2, 14, 5);
+    boost::shared_ptr<Graph::Path_type> path = s.find_shortest_path(2, 14, 5);
 
     using namespace boost::assign;
     // 2 -> 4 -> 8 -> 12 -> 14 would be correct as well
-    Graph::path_t expected_path = list_of(2)(1)(9)(11)(14);
+    Graph::Path_type expected_path = list_of(2)(1)(9)(11)(14);
     check_path(expected_path, *path);
 }

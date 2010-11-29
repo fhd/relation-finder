@@ -23,7 +23,7 @@ public:
     static boost::shared_ptr<Fetcher> get_instance();
 
     /// Returns the last read relations
-    Graph::graph_t get_relations() const;
+    Graph::Graph_type get_relations() const;
 
     /// Fetches new relations from the database regularly
     void fetch();
@@ -31,7 +31,7 @@ public:
 private:
     static boost::shared_ptr<Fetcher> instance;
     static boost::mutex instance_mutex;
-    Graph::graph_t relations;
+    Graph::Graph_type relations;
     mutable boost::mutex relations_mutex;
 
     Fetcher();

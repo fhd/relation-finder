@@ -28,7 +28,7 @@ boost::shared_ptr<Fetcher> Fetcher::get_instance()
     return instance;
 }
 
-Graph::graph_t Fetcher::get_relations() const
+Graph::Graph_type Fetcher::get_relations() const
 {
     boost::mutex::scoped_lock lock(relations_mutex);
     return relations;
@@ -57,18 +57,18 @@ void Fetcher::fetch()
     // Fetch all people
     pqxx::result presult = work.exec("select distinct owner_nr from buddys");
     for (pqxx::result::size_type i = 0; i < presult.size(); i++) {
-        Graph::node_t person_no;
+        Graph::Node_type person_no;
         presult[i]["owner_nr"].to(person_no);
 
         // Read and store their friends
-        Graph::nodes_t& friends = relations[person_no];
-        friends = Graph::nodes_t();
+        Graph::Nodes_type& friends = relations[person_no];
+        friends = Graph::Nodes_type();
 
         pqxx::result fresult =
             work.exec("select buddy_nr from buddys where owner_nr = "
                       + boost::lexical_cast<std::string>(person_no));
         for (pqxx::result::size_type j = 0; j < fresult.size(); j++) {
-            Graph::node_t friend_no;
+            Graph::Node_type friend_no;
             fresult[j]["buddy_nr"].to(friend_no);
             friends.push_back(friend_no);
         }

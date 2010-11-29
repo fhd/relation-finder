@@ -23,9 +23,9 @@ void Tcp_connection::start()
     uint32_t apid = read_uint();
 
     // Get the current relations and calculate the path
-    Graph::graph_t relations = Fetcher::get_instance()->get_relations();
+    Graph::Graph_type relations = Fetcher::get_instance()->get_relations();
     Searcher searcher(relations);
-    boost::shared_ptr<Graph::path_t> path =
+    boost::shared_ptr<Graph::Path_type> path =
         searcher.find_shortest_path(pid, apid, depth_limit);
 
     uint32_t path_length = !path ? 0 : path->size();
