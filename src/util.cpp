@@ -2,7 +2,7 @@
 #include "options.hpp"
 #include "util.hpp"
 
-boost::mutex Util::message_mutex;
+boost::mutex message_mutex;
 
 void Util::message(const std::string& s)
 {

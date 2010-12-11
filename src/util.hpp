@@ -7,11 +7,10 @@
 #include <boost/filesystem.hpp>
 
 /// A collection of utility methods */
-class Util {
-public:
+namespace Util {
     /// Converts arbitrary types into STL strings
     template<typename T>
-    static std::string convert_to_string(const T& t)
+    std::string convert_to_string(const T& t)
     {
         std::stringstream ss;
         ss << t;
@@ -19,13 +18,10 @@ public:
     }
 
     /// Presents a message to the user
-    static void message(const std::string& message);
+    void message(const std::string& message);
 
     /// Returns the directory of this program's binary
-    static boost::filesystem::path bin_dir();
-
-private:
-    static boost::mutex message_mutex;
-};
+    boost::filesystem::path bin_dir();
+}
 
 #endif

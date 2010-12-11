@@ -1,6 +1,5 @@
 * Write more test cases
 * Refactor
-   * Turn Util into a namespace
    * Get rid of singletons
    * Get rid of useless getters/setters
    * Use references and values instead of pointers where possible
