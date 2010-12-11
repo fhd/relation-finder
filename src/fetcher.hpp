@@ -6,8 +6,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
 #include "graph.hpp"
+#include "options.hpp"
 
-/// Reads relations regularly from the database
+/// Fetches relations from the database
 class Fetcher {
 public:
     class Connect_string_builder {
@@ -19,22 +20,19 @@ public:
         std::stringstream stream;
     };
 
-    /// Singleton instance getter
-    static boost::shared_ptr<Fetcher> get_instance();
+    /// Constructor
+    Fetcher(boost::shared_ptr<Options> options);
 
     /// Returns the last read relations
     Graph::Graph_type get_relations() const;
 
-    /// Fetches new relations from the database regularly
+    /// Fetches new relations from the database
     void fetch();
 
 private:
-    static boost::shared_ptr<Fetcher> instance;
-    static boost::mutex instance_mutex;
     Graph::Graph_type relations;
     mutable boost::mutex relations_mutex;
-
-    Fetcher();
+    boost::shared_ptr<Options> options;
 };
 
 #endif

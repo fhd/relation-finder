@@ -1,11 +1,15 @@
 #include <boost/bind.hpp>
 #include "util.hpp"
+#include "fetcher.hpp"
 #include "tcp_server.hpp"
 
 using asio::ip::tcp;
 
-Tcp_server::Tcp_server(asio::io_service& io_service, unsigned int port)
-    : acceptor(io_service, tcp::endpoint(tcp::v4(), port))
+Tcp_server::Tcp_server(asio::io_service& io_service, unsigned int port,
+                       boost::shared_ptr<Fetcher> fetcher,
+                       unsigned int depth_limit)
+    : acceptor(io_service, tcp::endpoint(tcp::v4(), port)), fetcher(fetcher),
+      depth_limit(depth_limit)
 {
     Util::message("Accepting connections.");
     start_accept();
@@ -13,8 +17,8 @@ Tcp_server::Tcp_server(asio::io_service& io_service, unsigned int port)
 
 void Tcp_server::start_accept()
 {
-    boost::shared_ptr<Tcp_connection> new_connection =
-        Tcp_connection::create(acceptor.io_service());
+    boost::shared_ptr<Tcp_connection> new_connection(
+            new Tcp_connection(acceptor.io_service(), fetcher, depth_limit));
 
     acceptor.async_accept(new_connection->get_socket(),
                           boost::bind(&Tcp_server::handle_accept,

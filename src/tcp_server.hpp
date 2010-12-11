@@ -6,11 +6,14 @@
 
 class Tcp_server {
 public:
-    /// Constructor creating a new multiclient server
-    Tcp_server(asio::io_service& io_service, unsigned int port);
+    /// Constructor creating a new multi-client server
+    Tcp_server(asio::io_service& io_service, unsigned int port,
+               boost::shared_ptr<Fetcher> fetcher, unsigned int depth_limit);
 
 private:
     asio::ip::tcp::acceptor acceptor;
+    boost::shared_ptr<Fetcher> fetcher;
+    unsigned int depth_limit;
 
     void start_accept();
     void handle_accept(boost::shared_ptr<Tcp_connection> new_connection,

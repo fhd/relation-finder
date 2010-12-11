@@ -10,17 +10,17 @@
 /// A thread functor, updating the relations
 class Fetcher_thread {
 public:
-    Fetcher_thread(const unsigned int& fetch_interval)
+    Fetcher_thread(boost::shared_ptr<Fetcher> fetcher,
+                   unsigned int fetch_interval)
+        : fetcher(fetcher), fetch_interval(fetch_interval)
     {
-        this->fetch_interval = fetch_interval;
     }
 
     void operator()()
     {
-        boost::shared_ptr<Fetcher> f = Fetcher::get_instance();
         for (;;) {
             // Fetch new relations
-            f->fetch();
+            fetcher->fetch();
 
             // Sleep for a while
             boost::xtime xt;
@@ -31,6 +31,7 @@ public:
     }
 
 private:
+    boost::shared_ptr<Fetcher> fetcher;
     unsigned int fetch_interval;
 };
 
@@ -38,22 +39,25 @@ int main(int argc, char* argv[])
 {
     try {
         // Parse the commandline options
-        boost::shared_ptr<Options> opts = Options::get_instance();
+        boost::shared_ptr<Options> options;
         try {
-            opts->parse(argc, argv);
+            options = boost::shared_ptr<Options>(new Options(argc, argv));
         } catch (int e) {
             return e;
         }
+        Util::verbose = options->get_verbose();
 
         Util::message("Initialised.");
 
         // Start the fetcher thread
-        Fetcher_thread fetcher(opts->get_fetching_interval());
-        boost::thread thread(fetcher);
+        boost::shared_ptr<Fetcher> fetcher(new Fetcher(options));
+        boost::thread thread(Fetcher_thread(fetcher,
+                                            options->get_fetching_interval()));
 
         // Start the server and listen for incoming connections
         asio::io_service io_service;
-        Tcp_server server(io_service, opts->get_port());
+        Tcp_server server(io_service, options->get_port(), fetcher,
+                          options->get_depth_limit());
         io_service.run();
     } catch (std::exception& e) {
         std::cerr << "Caught an exception: " << e.what() << std::endl;

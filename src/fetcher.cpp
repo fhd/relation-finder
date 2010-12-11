@@ -17,15 +17,9 @@ std::string Fetcher::Connect_string_builder::string() const
     return stream.str();
 }
 
-boost::shared_ptr<Fetcher> Fetcher::instance = boost::shared_ptr<Fetcher>();
-boost::mutex Fetcher::instance_mutex;
-
-boost::shared_ptr<Fetcher> Fetcher::get_instance()
+Fetcher::Fetcher(boost::shared_ptr<Options> options)
+    : options(options)
 {
-    boost::mutex::scoped_lock lock(instance_mutex);
-    if (!instance)
-        instance = boost::shared_ptr<Fetcher>(new Fetcher());
-    return instance;
 }
 
 Graph::Graph_type Fetcher::get_relations() const
@@ -43,14 +37,13 @@ void Fetcher::fetch()
     relations.clear();
 
     // Connect to the database
-    boost::shared_ptr<Options> opts = Options::get_instance();
     Connect_string_builder csb;
-    csb.set_option("dbname", opts->get_db_name());
-    csb.set_option("user", opts->get_db_user());
-    csb.set_option("password", opts->get_db_password());
-    csb.set_option("host", opts->get_db_host());
-    csb.set_option("port",
-                   Util::convert_to_string<unsigned int>(opts->get_db_port()));
+    csb.set_option("dbname", options->get_db_name());
+    csb.set_option("user", options->get_db_user());
+    csb.set_option("password", options->get_db_password());
+    csb.set_option("host", options->get_db_host());
+    csb.set_option("port", Util::convert_to_string<unsigned int>(
+                                   options->get_db_port()));
     pqxx::connection connection(csb.string());
     pqxx::work work(connection);
 
@@ -77,8 +70,4 @@ void Fetcher::fetch()
     Util::message("Fetched "
                   + boost::lexical_cast<std::string>(presult.size())
                   + " relations.");
-}
-
-Fetcher::Fetcher()
-{
 }

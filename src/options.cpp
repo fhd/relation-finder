@@ -27,17 +27,6 @@
 namespace fs = boost::filesystem;
 namespace po = boost::program_options;
 
-boost::shared_ptr<Options> Options::instance = boost::shared_ptr<Options>();
-boost::mutex Options::instance_mutex;
-
-boost::shared_ptr<Options> Options::get_instance()
-{
-    boost::mutex::scoped_lock lock(instance_mutex);
-    if (!instance)
-        instance = boost::shared_ptr<Options>(new Options());
-    return instance;
-}
-
 boost::shared_ptr<fs::path> find_config_file(const char* binary_path)
 {
     // The following candidates will be searched in that order
@@ -53,7 +42,7 @@ boost::shared_ptr<fs::path> find_config_file(const char* binary_path)
     return boost::shared_ptr<fs::path>();
 }
 
-void Options::parse(int argc, char* argv[])
+Options::Options(int argc, char* argv[])
 {
     boost::mutex::scoped_lock lock(options_mutex);
 
@@ -165,8 +154,4 @@ unsigned int Options::get_db_port() const
 {
     boost::mutex::scoped_lock lock(options_mutex);
     return db_port;
-}
-
-Options::Options()
-{
 }

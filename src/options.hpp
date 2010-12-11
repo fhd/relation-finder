@@ -9,15 +9,13 @@
 /// Reads and provides program options
 class Options {
 public:
-    /// Singleton instance getter
-    static boost::shared_ptr<Options> get_instance();
-
     /**
-     * Parses options from the command line and the configuration file.
-     * Throws an integer exception if execution should be aborted, where the
-     * integer is the proposed return code for the program.
+     * Constructor that parses options from the command line and the
+     * configuration file
+     * \throws int If execution should be aborted, where the integer is the
+     *             proposed return code for the program
      */
-    void parse(int argc, char* argv[]);
+    Options(int argc, char* argv[]);
 
     unsigned int get_port() const;
     unsigned int get_fetching_interval() const;
@@ -42,8 +40,6 @@ private:
     std::string db_password;
     std::string db_host;
     unsigned int db_port;
-
-    Options();
 };
 
 #endif

@@ -1,6 +1,5 @@
 * Write more test cases
 * Refactor
-   * Get rid of singletons
    * Get rid of useless getters/setters
    * Use references and values instead of pointers where possible
    * Make sure that functions are never longer than one screen height

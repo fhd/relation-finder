@@ -3,10 +3,11 @@
 #include "searcher.hpp"
 #include "tcp_connection.hpp"
 
-boost::shared_ptr<Tcp_connection> Tcp_connection::create(
-        asio::io_service& io_service)
+Tcp_connection::Tcp_connection(asio::io_service& io_service,
+                               boost::shared_ptr<Fetcher> fetcher,
+                               unsigned int depth_limit)
+    : socket(io_service), fetcher(fetcher), depth_limit(depth_limit)
 {
-    return boost::shared_ptr<Tcp_connection>(new Tcp_connection(io_service));
 }
 
 asio::ip::tcp::socket& Tcp_connection::get_socket()
@@ -23,7 +24,7 @@ void Tcp_connection::start()
     uint32_t apid = read_uint();
 
     // Get the current relations and calculate the path
-    Graph::Graph_type relations = Fetcher::get_instance()->get_relations();
+    Graph::Graph_type relations = fetcher->get_relations();
     Searcher searcher(relations);
     boost::shared_ptr<Graph::Path_type> path =
         searcher.find_shortest_path(pid, apid, depth_limit);
@@ -36,12 +37,6 @@ void Tcp_connection::start()
     // Write the path
     for (uint32_t i = 0; i < path_length; i++)
         write_uint(path->at(i));
-}
-
-Tcp_connection::Tcp_connection(asio::io_service& io_service)
-    : socket(io_service),
-      depth_limit(Options::get_instance()->get_depth_limit())
-{
 }
 
 uint32_t Tcp_connection::read_uint()

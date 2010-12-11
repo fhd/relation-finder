@@ -8,6 +8,9 @@
 
 /// A collection of utility methods */
 namespace Util {
+    /// Controls whether output should be verbose
+    extern bool verbose;
+
     /// Converts arbitrary types into STL strings
     template<typename T>
     std::string convert_to_string(const T& t)

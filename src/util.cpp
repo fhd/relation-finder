@@ -3,10 +3,11 @@
 #include "util.hpp"
 
 boost::mutex message_mutex;
+bool Util::verbose = false;
 
 void Util::message(const std::string& s)
 {
-    if (Options::get_instance()->get_verbose()) {
+    if (verbose) {
         boost::mutex::scoped_lock lock(message_mutex);
         std::cout << s << std::endl;
     }
