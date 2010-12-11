@@ -1,4 +1,3 @@
-* Move to CMake
 * Write more test cases
 * Refactor
    * Turn Util into a namespace

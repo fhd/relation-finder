@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.6)
+project(relation-finder)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "/usr/local" CACHE PATH "Install prefix"
+    FORCE)
+endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+add_subdirectory(src)
+add_subdirectory(tools)
+enable_testing()
+add_subdirectory(test)

@@ -1,8 +1,0 @@
-install dist
-	: relation-finder-client
-	: <location>$(DIST_DIR)/bin
-	;
-
-exe relation-finder-client
-	: relation_finder_client.cpp 
-	;
