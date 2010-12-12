@@ -3,7 +3,7 @@
 
 #include <string>
 
-/// The logging system */
+/// The logging system
 class Logger {
 public:
     /// Controls whether output should be verbose

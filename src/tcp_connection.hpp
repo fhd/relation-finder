@@ -10,16 +10,14 @@ public:
      * Constructor creating a new connection that returns paths up to the
      * @a depth_limit from relations of the @a fetcher
      */
-    Tcp_connection(asio::io_service& io_service, Fetcher& fetcher,
-                   unsigned int depth_limit);
-
-    asio::ip::tcp::socket& get_socket();
+    Tcp_connection(boost::shared_ptr<asio::ip::tcp::socket> socket,
+                   Fetcher& fetcher, unsigned int depth_limit);
 
     /// Commences the communication
     void start();
 
 private:
-    asio::ip::tcp::socket socket;
+    boost::shared_ptr<asio::ip::tcp::socket> socket;
     Fetcher& fetcher;
     unsigned int depth_limit;
 

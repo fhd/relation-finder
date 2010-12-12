@@ -4,6 +4,7 @@
 #include <boost/program_options.hpp>
 #include <boost/foreach.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/filesystem.hpp>
 #include "options.hpp"
 #include "util.hpp"
 
@@ -47,32 +48,7 @@ Options::Options(int argc, char* argv[])
 {
     boost::mutex::scoped_lock lock(options_mutex);
 
-    po::options_description desc("Options");
-    desc.add_options()
-        ("port", po::value<unsigned int>(&port)
-         ->default_value(DEFAULT_PORT),
-         "set the tcp port to listen on")
-        ("fetching-interval", po::value<unsigned int>(&fetching_interval)
-         ->default_value(DEFAULT_FETCHING_INTERVAL),
-         "set the time (in seconds) to wait before fetching new \
-relations from the database")
-        ("depth-limit", po::value<unsigned int>(&depth_limit)
-         ->default_value(DEFAULT_DEPTH_LIMIT),
-         "set the maximum length of relationship paths")
-        ("db-name", po::value<std::string>(&db_name)
-         ->default_value(DEFAULT_DB_NAME), "set the database name")
-        ("db-user", po::value<std::string>(&db_user)
-         ->default_value(DEFAULT_DB_USER), "set the database user")
-        ("db-password", po::value<std::string>(&db_password)
-         ->default_value(DEFAULT_DB_PASSWORD),
-         "set the database user's password")
-        ("db-host", po::value<std::string>(&db_host)
-         ->default_value(DEFAULT_DB_HOST), "set the database host")
-        ("db-port", po::value<unsigned int>(&db_port)
-         ->default_value(DEFAULT_DB_PORT), "set the database port")
-        ("verbose", "explain what is happening")
-        ("help", "display this help and exit")
-        ("version", "output version information and exit");
+    po::options_description desc = create_description();
 
     po::variables_map vm;
 
@@ -155,4 +131,35 @@ unsigned int Options::get_db_port() const
 {
     boost::mutex::scoped_lock lock(options_mutex);
     return db_port;
+}
+
+po::options_description Options::create_description()
+{
+    po::options_description desc("Options");
+    desc.add_options()
+        ("port", po::value<unsigned int>(&port)
+         ->default_value(DEFAULT_PORT),
+         "set the tcp port to listen on")
+        ("fetching-interval", po::value<unsigned int>(&fetching_interval)
+         ->default_value(DEFAULT_FETCHING_INTERVAL),
+         "set the time (in seconds) to wait before fetching new \
+relations from the database")
+        ("depth-limit", po::value<unsigned int>(&depth_limit)
+         ->default_value(DEFAULT_DEPTH_LIMIT),
+         "set the maximum length of relationship paths")
+        ("db-name", po::value<std::string>(&db_name)
+         ->default_value(DEFAULT_DB_NAME), "set the database name")
+        ("db-user", po::value<std::string>(&db_user)
+         ->default_value(DEFAULT_DB_USER), "set the database user")
+        ("db-password", po::value<std::string>(&db_password)
+         ->default_value(DEFAULT_DB_PASSWORD),
+         "set the database user's password")
+        ("db-host", po::value<std::string>(&db_host)
+         ->default_value(DEFAULT_DB_HOST), "set the database host")
+        ("db-port", po::value<unsigned int>(&db_port)
+         ->default_value(DEFAULT_DB_PORT), "set the database port")
+        ("verbose", "explain what is happening")
+        ("help", "display this help and exit")
+        ("version", "output version information and exit");
+    return desc;
 }

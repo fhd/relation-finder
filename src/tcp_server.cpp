@@ -16,13 +16,14 @@ Tcp_server::Tcp_server(asio::io_service& io_service, unsigned int port,
 
 void Tcp_server::start_accept()
 {
+    boost::shared_ptr<asio::ip::tcp::socket> socket(
+            new asio::ip::tcp::socket(acceptor.io_service()));
     boost::shared_ptr<Tcp_connection> new_connection(
-            new Tcp_connection(acceptor.io_service(), fetcher, depth_limit));
+            new Tcp_connection(socket, fetcher, depth_limit));
 
-    acceptor.async_accept(new_connection->get_socket(),
-                          boost::bind(&Tcp_server::handle_accept, this,
-                                      new_connection,
-                                      asio::placeholders::error));
+    acceptor.async_accept(*socket, boost::bind(&Tcp_server::handle_accept, this,
+                                               new_connection,
+                                               asio::placeholders::error));
 }
 
 void Tcp_server::handle_accept(boost::shared_ptr<Tcp_connection> new_connection,

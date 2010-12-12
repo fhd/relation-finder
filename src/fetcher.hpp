@@ -13,7 +13,7 @@ public:
     class Connect_string_builder {
     public:
         void set_option(const std::string& name, const std::string& value);
-        std::string string() const;
+        std::string get_string() const;
 
     private:
         std::stringstream stream;

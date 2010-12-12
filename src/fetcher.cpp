@@ -13,7 +13,7 @@ void Fetcher::Connect_string_builder::set_option(const std::string& name,
         stream << name << "=" << value << " ";
 }
 
-std::string Fetcher::Connect_string_builder::string() const
+std::string Fetcher::Connect_string_builder::get_string() const
 {
     return stream.str();
 }
@@ -45,7 +45,7 @@ void Fetcher::fetch()
     csb.set_option("host", options.get_db_host());
     csb.set_option("port", Util::convert_to_string<unsigned int>(
                                    options.get_db_port()));
-    pqxx::connection connection(csb.string());
+    pqxx::connection connection(csb.get_string());
     pqxx::work work(connection);
 
     // Fetch all people

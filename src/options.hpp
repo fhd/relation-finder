@@ -3,7 +3,12 @@
 
 #include <string>
 #include <boost/thread/mutex.hpp>
-#include <boost/filesystem.hpp>
+
+namespace boost {
+    namespace program_options {
+        class options_description;
+    }
+}
 
 /// Reads and provides program options
 class Options {
@@ -37,6 +42,8 @@ private:
     std::string db_password;
     std::string db_host;
     unsigned int db_port;
+
+    boost::program_options::options_description create_description();
 };
 
 #endif
