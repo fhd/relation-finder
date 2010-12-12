@@ -3,6 +3,7 @@
 #include <vector>
 #include <boost/program_options.hpp>
 #include <boost/foreach.hpp>
+#include <boost/shared_ptr.hpp>
 #include "options.hpp"
 #include "util.hpp"
 

@@ -6,8 +6,7 @@
 using asio::ip::tcp;
 
 Tcp_server::Tcp_server(asio::io_service& io_service, unsigned int port,
-                       boost::shared_ptr<Fetcher> fetcher,
-                       unsigned int depth_limit)
+                       Fetcher& fetcher, unsigned int depth_limit)
     : acceptor(io_service, tcp::endpoint(tcp::v4(), port)), fetcher(fetcher),
       depth_limit(depth_limit)
 {
@@ -21,8 +20,8 @@ void Tcp_server::start_accept()
             new Tcp_connection(acceptor.io_service(), fetcher, depth_limit));
 
     acceptor.async_accept(new_connection->get_socket(),
-                          boost::bind(&Tcp_server::handle_accept,
-                                      this, new_connection,
+                          boost::bind(&Tcp_server::handle_accept, this,
+                                      new_connection,
                                       asio::placeholders::error));
 }
 

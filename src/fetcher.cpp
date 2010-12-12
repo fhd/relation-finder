@@ -17,7 +17,7 @@ std::string Fetcher::Connect_string_builder::string() const
     return stream.str();
 }
 
-Fetcher::Fetcher(boost::shared_ptr<Options> options)
+Fetcher::Fetcher(Options& options)
     : options(options)
 {
 }
@@ -38,12 +38,12 @@ void Fetcher::fetch()
 
     // Connect to the database
     Connect_string_builder csb;
-    csb.set_option("dbname", options->get_db_name());
-    csb.set_option("user", options->get_db_user());
-    csb.set_option("password", options->get_db_password());
-    csb.set_option("host", options->get_db_host());
+    csb.set_option("dbname", options.get_db_name());
+    csb.set_option("user", options.get_db_user());
+    csb.set_option("password", options.get_db_password());
+    csb.set_option("host", options.get_db_host());
     csb.set_option("port", Util::convert_to_string<unsigned int>(
-                                   options->get_db_port()));
+                                   options.get_db_port()));
     pqxx::connection connection(csb.string());
     pqxx::work work(connection);
 

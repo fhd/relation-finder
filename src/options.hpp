@@ -2,7 +2,6 @@
 #define OPTIONS_HPP
 
 #include <string>
-#include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/filesystem.hpp>
 
@@ -28,8 +27,6 @@ public:
     unsigned int get_db_port() const;
 
 private:
-    static boost::shared_ptr<Options> instance;
-    static boost::mutex instance_mutex;
     mutable boost::mutex options_mutex;
     unsigned int port;
     unsigned int fetching_interval;

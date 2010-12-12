@@ -3,7 +3,6 @@
 
 #include <string>
 #include <sstream>
-#include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
 #include "graph.hpp"
 #include "options.hpp"
@@ -21,7 +20,7 @@ public:
     };
 
     /// Constructor
-    Fetcher(boost::shared_ptr<Options> options);
+    Fetcher(Options& options);
 
     /// Returns the last read relations
     Graph::Graph_type get_relations() const;
@@ -32,7 +31,7 @@ public:
 private:
     Graph::Graph_type relations;
     mutable boost::mutex relations_mutex;
-    boost::shared_ptr<Options> options;
+    Options& options;
 };
 
 #endif
