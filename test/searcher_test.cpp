@@ -6,7 +6,7 @@
 #include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include "../src/searcher.hpp"
+#include <searcher.hpp>
 
 std::string path_to_string(Graph::Path_type& path)
 {
