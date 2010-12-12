@@ -1,5 +1,5 @@
 #include <boost/bind.hpp>
-#include "util.hpp"
+#include "logger.hpp"
 #include "fetcher.hpp"
 #include "tcp_server.hpp"
 
@@ -10,7 +10,7 @@ Tcp_server::Tcp_server(asio::io_service& io_service, unsigned int port,
     : acceptor(io_service, tcp::endpoint(tcp::v4(), port)), fetcher(fetcher),
       depth_limit(depth_limit)
 {
-    Util::message("Accepting connections.");
+    Logger::log("Accepting connections.");
     start_accept();
 }
 
@@ -28,7 +28,7 @@ void Tcp_server::start_accept()
 void Tcp_server::handle_accept(boost::shared_ptr<Tcp_connection> new_connection,
                                const asio::error_code& error)
 {
-    Util::message("New connection.");
+    Logger::log("New connection.");
 
     if (!error) {
         new_connection->start();

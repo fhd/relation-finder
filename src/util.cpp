@@ -1,19 +1,4 @@
-#include <iostream>
-#include "options.hpp"
 #include "util.hpp"
-
-bool Util::verbose = false;
-
-boost::mutex message_mutex;
-
-void Util::message(const std::string& s)
-{
-    if (!verbose)
-        return;
-
-    boost::mutex::scoped_lock lock(message_mutex);
-    std::cout << s << std::endl;
-}
 
 boost::filesystem::path Util::bin_dir()
 {

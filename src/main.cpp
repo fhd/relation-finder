@@ -3,7 +3,7 @@
 #include <boost/thread/xtime.hpp>
 #include <asio.hpp>
 #include "options.hpp"
-#include "util.hpp"
+#include "logger.hpp"
 #include "fetcher.hpp"
 #include "tcp_server.hpp"
 
@@ -39,9 +39,9 @@ int main(int argc, char* argv[])
     try {
         // Parse the commandline options
         Options options(argc, argv);
-        Util::verbose = options.get_verbose();
+        Logger::verbose = options.get_verbose();
 
-        Util::message("Initialised.");
+        Logger::log("Initialised.");
 
         // Start the fetcher thread
         Fetcher fetcher(options);

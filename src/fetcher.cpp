@@ -3,6 +3,7 @@
 #include <boost/lexical_cast.hpp>
 #include "options.hpp"
 #include "util.hpp"
+#include "logger.hpp"
 #include "fetcher.hpp"
 
 void Fetcher::Connect_string_builder::set_option(const std::string& name,
@@ -32,7 +33,7 @@ void Fetcher::fetch()
 {
     boost::mutex::scoped_lock lock(relations_mutex);
 
-    Util::message("Fetching new relations from the database ...");
+    Logger::log("Fetching new relations from the database ...");
 
     relations.clear();
 
@@ -67,7 +68,6 @@ void Fetcher::fetch()
         }
     }
 
-    Util::message("Fetched "
-                  + boost::lexical_cast<std::string>(presult.size())
-                  + " relations.");
+    Logger::log("Fetched " + boost::lexical_cast<std::string>(presult.size())
+                + " relations.");
 }
