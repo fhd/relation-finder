@@ -1,6 +1,8 @@
-2.2.0
+2.2.0 (2010-12-13)
 ==================
 * Renamed to relation-finder
+* Moved from Boost.Build to CMake
+* Heavy refactoring
 
 2.1.0 (2009-11-14)
 ==================
