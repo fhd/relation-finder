@@ -8,7 +8,7 @@
 #include "options.hpp"
 #include "util.hpp"
 
-#define VERSION "2.2.0"
+#define VERSION "2.3.0"
 #define DESCRIPTION_TEXT "A daemon that finds the shortest path between two " \
     "people in a social network."
 #define USAGE_TEXT "Usage: relation-finder [OPTION]..."
