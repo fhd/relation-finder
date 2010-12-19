@@ -1,5 +1,5 @@
-#ifndef CLIENT_HPP
-#define CLIENT_HPP
+#ifndef TCP_CONNECTION_HPP
+#define TCP_CONNECTION_HPP
 
 #include <asio.hpp>
 

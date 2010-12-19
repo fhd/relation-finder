@@ -1,5 +1,5 @@
-#ifndef SEARCH_HPP
-#define SEARCH_HPP
+#ifndef SEARCHER_HPP
+#define SEARCHER_HPP
 
 #include "graph.hpp"
 
