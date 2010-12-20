@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE searcher
+#define BOOST_TEST_MAIN
 
 #include <string>
 #include <boost/assign.hpp>
