@@ -5,7 +5,6 @@
 #include <boost/assign.hpp>
 #include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
-
 #include <searcher.hpp>
 
 std::string path_to_string(Graph::Path_type& path)
@@ -33,6 +32,8 @@ void check_path(Graph::Path_type& expected_path, Graph::Path_type &path)
 }
 
 struct Small_graph {
+    Graph::Graph_type graph;
+
     Small_graph()
     {
         using namespace boost::assign;
@@ -44,13 +45,11 @@ struct Small_graph {
         graph[6] = list_of(3)(4)(7);
         graph[7] = list_of(6);
     }
-
-    ~Small_graph() {}
-
-    Graph::Graph_type graph;
 };
 
 struct Large_graph {
+    Graph::Graph_type graph;
+
     Large_graph()
     {
         using namespace boost::assign;
@@ -71,10 +70,6 @@ struct Large_graph {
         graph[15] = list_of(12);
         graph[16] = list_of(7);
     }
-
-    ~Large_graph() {}
-
-    Graph::Graph_type graph;
 };
 
 BOOST_FIXTURE_TEST_CASE(test_simple_path, Small_graph)
