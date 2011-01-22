@@ -5,7 +5,7 @@
 #include <sstream>
 #include <boost/filesystem.hpp>
 
-/// A collection of utility methods */
+/// A collection of utility methods
 namespace Util {
     /// Converts arbitrary types into STL strings
     template<typename T>
